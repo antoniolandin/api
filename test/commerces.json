@@ -1,0 +1,26 @@
+[ 
+    {
+        "name": "Tacos John",
+        "CIF": "12345678A",
+        "email": "johndoe@proton.me",
+        "phone": "123456789",
+        "address": "Calle Falsa 123",
+        "id": 0
+    },
+    {
+        "name": "Hermanos Doe",
+        "CIF": "87654321B",
+        "email": "janedoe@proton.me",
+        "phone": "987654321",
+        "address": "Calle Falsa 321",
+        "id": 1
+    },
+    {
+        "name": "Churros Smith",
+        "CIF": "12345678C",
+        "email": "johnsmith@proton.me",
+        "phone": "622334123",
+        "address": "Calle Falsa 123",
+        "id": 2
+    }
+]
