@@ -2,6 +2,7 @@ const { userModel } = require('../models')
 const { handleHttpError } = require('../utils/handleError')
 const { encryptPassword, comparePassword } = require('../utils/handlePassword')
 const { tokenSign } = require('../utils/handleJwt')
+const colors = require('colors')
 
 register = async (req, res) => {
     try {
@@ -18,13 +19,13 @@ register = async (req, res) => {
         }
         
         // Mostramos en consola que el usuario ha sido registrado correctamente
-        console.log(`Usuario ${userData.email} registrado correctamente`)
+        console.log("Usuario ".green + userData.email.brightBlue + " registrado correctamente".green)
         // Enviamos al cliente el token y los datos del usuario
         res.status(201).json(data)
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al registrar el usuario
-        console.log(`Error al registrar usuario:\n${error.message}`)
+        console.log("Error al registrar usuario:\n".bgRed + error.message.brightRed)
         // Enviamos al cliente un mensaje de error
         handleHttpError(res, error.message, 400)
     } 
@@ -40,8 +41,8 @@ login = async (req, res) => {
         // Verificamos si el usuario existe
         if (!userData) {
             // Mostramos en consola que el usuario no existe
-            console.log(`Usuario ${req.body.id} no existe
-            `)
+            console.log("Usuario ".red + req.body.id.toString().brightRed + " no existe".red
+            )
             // Enviamos al cliente un mensaje de error
             handleHttpError(res, 'Usuario no existe', 404)
             return
@@ -49,7 +50,7 @@ login = async (req, res) => {
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al iniciar sesión
-        console.log(`Error al iniciar sesión:\n${error.message}`)
+        console.log("Error al iniciar sesión:\n".red + error.message.brightRed)
         // Enviamos al cliente un mensaje de error
         handleHttpError(res, error.message, 400)
     }

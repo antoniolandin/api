@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
+const colors = require('colors')
 
 // Creamos la aplicación express
 const app = express()
@@ -29,5 +30,5 @@ app.use('/api', require('./routes'))
 
 // Escuchamos en el puerto
 app.listen(port, () => {
-    console.log(`Servidor escuchando en el puerto ${port}`)
+    console.log("Servidor escuchando en el puerto ".magenta + port.toString().yellow)
 })

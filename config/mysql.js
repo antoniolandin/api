@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize")
+const colors = require("colors")
 
 const database = process.env.MYSQL_DATABASE
 const username = process.env.MYSQL_USER
@@ -19,13 +20,13 @@ const db = new Sequelize(
 const dbConnectMySql = async () => {
     try {
         await db.authenticate()
-            console.log("MySQL conexión correcta")
+            console.log("MySQL conexión correcta".green)
 
         // drop all tables
         await db.sync({force:true})
     }
     catch(err) {
-            console.log("MySQL error de conexión:", err)
+            console.log("MySQL error de conexión:".red + err.message.brightRed)
     }
 }
 
