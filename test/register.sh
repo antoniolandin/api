@@ -11,7 +11,7 @@ if [ ! -f $archivo_json ]; then
     exit 1
 fi
 
-API_URL="http://localhost:3000/api/users"
+API_URL="http://localhost:3000/api/auth/register"
 
 # Leemos el archivo JSON y lo recorremos
 jq -c '.[]' $archivo_json | while read i; do

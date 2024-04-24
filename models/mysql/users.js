@@ -8,7 +8,17 @@ const users = db.define('users', {
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: {
+            args: true,
+            msg: 'El email ya está registrado'
+        },
+        validate: {
+            isEmail: {
+                args: true,
+                msg: 'El email debe ser un correo válido'
+            }
+        }
     },
     password: {
         type: DataTypes.STRING,

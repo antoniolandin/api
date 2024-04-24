@@ -2,17 +2,13 @@ const { check } = require('express-validator');
 const validateResults = require('../utils/handleValidator')
 
 const validatorRegister = [
-    check('email').isEmail().withMessage('Email is invalid'),
-    check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-    check('name').not().isEmpty().withMessage('Name is required')
-]
-
-const validatorLogin = [
-    check('email').isEmail().withMessage('Email is invalid'),
-    check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+    check('name').exists().notEmpty().withMessage('El nombre es requerido'),
+    check('email').exists().notEmpty().withMessage('El email es requerido'),
+    check('email').isEmail().withMessage('El email no es válido'),
+    check('password').exists().notEmpty().withMessage('La contraseña es requerida'),
+    (req, res, next) => validateResults(req, res, next),
 ]
 
 module.exports = {
     validatorRegister,
-    validatorLogin,
 }
