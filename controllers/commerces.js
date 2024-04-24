@@ -8,7 +8,7 @@ getCommerces = async (req, res) => {
     const ascending = req.query.asc
 
     // Obtenemos los comercios de la base de datos
-    const data = await commerceModel.find({})
+    const data = await commerceModel.findAll()
 
     // Si el parámetro de query es 'true', ordenamos los comercios por CIF
     if (ascending === 'true') {
