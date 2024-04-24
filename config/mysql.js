@@ -5,7 +5,7 @@ const username = process.env.MYSQL_USER
 const password = process.env.MYSQL_PASSWORD
 const host = process.env.MYSQL_HOST
 
-const sequelize = new Sequelize(
+const db = new Sequelize(
     database,
     username,
     password,
@@ -17,7 +17,7 @@ const sequelize = new Sequelize(
 
 const dbConnectMySql = async () => {
     try {
-        await sequelize.authenticate()
+        await db.authenticate()
             console.log("MySQL conexión correcta")
     }
     catch(err) {
@@ -25,4 +25,4 @@ const dbConnectMySql = async () => {
     }
 }
 
-module.exports = {sequelize, dbConnectMySql}
+module.exports = {db, dbConnectMySql}

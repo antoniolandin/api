@@ -41,4 +41,4 @@ const CommerceSchema = new mongoose.Schema(
 CommerceSchema.plugin(mongooseDelete, { overrideMethods: 'all'});
 
 // "commerces" será el nombre de la colección en la base de datos
-module.exports = mongoose.model('commerce', CommerceSchema);
+module.exports = mongoose.model('commerces', CommerceSchema);

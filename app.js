@@ -13,7 +13,7 @@ app.use(express.json())
 const port = process.env.PORT ?? 3000
 
 // Conectamos a la base de datos
-const { sequelize, dbConnectMySql } = require("./config/mysql")
+const { db, dbConnectMySql } = require("./config/mysql")
 
 if (process.env.ENGINE_DB === 'nosql'){
     dbConnect()
@@ -21,7 +21,7 @@ if (process.env.ENGINE_DB === 'nosql'){
 else{
         // Crea las colecciones por defecto si no existieran
         dbConnectMySql()
-        sequelize.sync() // Crea las tablas en la base de datos si no existieran
+        db.sync() // Crea las tablas en la base de datos si no existieran
 }
 
 // Rutas

@@ -1,9 +1,7 @@
-const { sequelize } = require('../../config/mysql')
-const Sequelize = require('sequelize')
+const { db } = require('../../config/mysql')
+const { DataTypes } = require('sequelize')
 
-const { DataTypes } = Sequelize
-
-const commerces = sequelize.define('commerces', {
+const commerces = db.define('commerces', {
     name: {
         type: DataTypes.STRING,
         allowNull: false
