@@ -31,10 +31,6 @@ const users = db.define('users', {
             isEmail: {
                 args: true,
                 msg: 'El email debe ser un correo válido'
-            },
-            notEmpty: {
-                args: true,
-                msg: 'El email no puede estar vacío'
             }
         }
     },
