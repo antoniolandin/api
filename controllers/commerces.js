@@ -12,4 +12,5 @@ const createCommerce = async (req, res) => {
 
 // Exportamos las funciones 
 module.exports = {
+    createCommerce
 }
