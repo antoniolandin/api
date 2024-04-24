@@ -41,10 +41,6 @@ const users = db.define('users', {
             msg: 'La contraseña es obligatoria'
         },
         validate: {
-            notEmpty: {
-                args: true,
-                msg: 'La contraseña no puede estar vacía'
-            },
             len: {
                 args: [6, 255],
                 msg: 'La contraseña debe tener al menos 6 caracteres'

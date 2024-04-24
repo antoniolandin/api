@@ -12,6 +12,10 @@ const commerces = db.define('commerces', {
             notEmpty: {
                 args: true,
                 msg: 'El nombre del comercio no puede estar vacío'
+            },
+            max: {
+                args: 50,
+                msg: 'El nombre del comercio no puede tener más de 50 caracteres'
             }
         }
     },
@@ -46,6 +50,10 @@ const commerces = db.define('commerces', {
             notEmpty: {
                 args: true,
                 msg: 'La dirección del comercio no puede estar vacía'
+            },
+            max: {
+                args: 50,
+                msg: 'La dirección del comercio no puede tener más de 50 caracteres'
             }
         }
     },
@@ -93,6 +101,10 @@ const commerces = db.define('commerces', {
             notEmpty: {
                 args: true,
                 msg: 'La ciudad no puede estar vacía'
+            },
+            max: {
+                args: 30,
+                msg: 'La ciudad no puede tener más de 30 caracteres'
             }
         }
     },
@@ -111,6 +123,10 @@ const commerces = db.define('commerces', {
             notEmpty: {
                 args: true,
                 msg: 'El título no puede estar vacío'
+            },
+            max: {
+                args: 50,
+                msg: 'El título no puede tener más de 50 caracteres'
             }
         }
     },
