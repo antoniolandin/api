@@ -23,7 +23,7 @@ register = async (req, res) => {
         // Mostramos en consola que el usuario ha sido registrado correctamente
         console.log(`Usuario ${userData.email} registrado correctamente`)
         // Enviamos al cliente el token y los datos del usuario
-        res.status(200).json(data)
+        res.status(201).json(data)
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al registrar el usuario

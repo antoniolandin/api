@@ -46,12 +46,15 @@ jq -c '.[]' $archivo_json | while read i; do
     
     # Creamos el usuario mediante la petición POST a la API
     respuesta=$(curl -s -i -X POST -H "Content-Type: application/json" -d "$i" $API_URL | sed $'s/[^[:print:]\t]//g')
-
+    
+    # El código será numérico gracias al doble paréntesis
     codigo=$(echo $respuesta | grep -oP '^HTTP/1\.1 \K[0-9]+')
+
+    # Extraemos el mensaje de la respuesta
     mensaje=$(echo $respuesta | grep -oP '{.*}')
 
     # Mostramos la respuesta de la API 
-    if [ $codigo -eq 200 ]; then
+    if [[ $codigo -ge 200 && $codigo -le 299 ]]; then
         echo -e "${green}Usuario creado correctamente${end}"
     else
         echo -e "${red}Error al crear el usuario: Error $codigo ${end}"
