@@ -10,9 +10,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// El puerto es obtenido desde las variables de entorno, si no existe, se usa el puerto 3000
-const port = process.env.PORT ?? 3000
-
 // Conectamos a la base de datos
 const { db, dbConnectMySql } = require("./config/mysql")
 
@@ -28,7 +25,5 @@ else{
 // Rutas
 app.use('/api', require('./routes'))
 
-// Escuchamos en el puerto
-app.listen(port, () => {
-    console.log("Servidor escuchando en el puerto ".magenta + port.toString().yellow)
-})
+// Exportamos la aplicación para usarla en otros archivos
+module.exports = {app, db}

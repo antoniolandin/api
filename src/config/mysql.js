@@ -21,9 +21,6 @@ const dbConnectMySql = async () => {
     try {
         await db.authenticate()
             console.log("MySQL conexión correcta".green)
-
-        // drop all tables
-        await db.sync({force:true})
     }
     catch(err) {
             console.log("MySQL error de conexión:".red + err.message.brightRed)
