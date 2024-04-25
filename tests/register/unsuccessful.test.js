@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../../app')
 const { sequelize } = require('../../models')
 
-good_user = {
+bad_user = {
     name: 'antonio',
     email: 'antonio',
     password: '12345',
@@ -26,22 +26,12 @@ afterAll(done => {
 
 // Test de registro de usuario
 describe('Post Endpoints', () => {
-  it('debería registrar a un usuario correctamente', async () => {
+  it('deberá dar un error debido a que los campos del usuario están mal', async () => {
     const res = await request(app)
       .post('/api/auth/register')
-      .send(good_user)
+      .send(bad_user)
     
-    // Debe devolver un status 201 (created)
-    expect(res.statusCode).toEqual(201)
-
-    // Debe devolver un token y un usuario
-    expect(res.body).toHaveProperty('token')
-    expect(res.body).toHaveProperty('user')
-    
-    // El usuario enviado debe ser igual al usuario recibido
-    for (const key in good_user) {
-        if (key != 'password')
-            expect(res.body.user[key]).toEqual(good_user[key])
-    }
+    // Debe devolver un status 400 (Bad Request)
+    expect(res.statusCode).toEqual(400)
   })
 })

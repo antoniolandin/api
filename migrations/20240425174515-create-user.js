@@ -12,8 +12,9 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      venail: {
-        type: Sequelize.STRING
+      email: {
+        type: Sequelize.STRING,
+        unique: true
       },
       password: {
         type: Sequelize.STRING
@@ -28,7 +29,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       recibeOffers: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
