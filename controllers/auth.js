@@ -1,4 +1,4 @@
-const { userModel } = require('../models')
+const { user } = require('../models')
 const { handleHttpError } = require('../utils/handleError')
 const { encryptPassword, comparePassword } = require('../utils/handlePassword')
 const { tokenSign } = require('../utils/handleJwt')
@@ -7,7 +7,7 @@ const colors = require('colors')
 register = async (req, res) => {
     try {
         // Creamos al usuario en la base de datos
-        const userData = await userModel.create(req.body)
+        const userData = await user.create(req.body)
         
         // Eliminamos la contraseña del objeto del usuario (motivos de seguridad)
         userData.set('password', undefined, { strict: false })

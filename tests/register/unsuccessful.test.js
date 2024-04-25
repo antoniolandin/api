@@ -1,11 +1,12 @@
 const request = require('supertest')
-const {app, db} = require('../app')
+const app = require('../../app')
+const { sequelize } = require('../../models')
 
 good_user = {
     name: 'antonio',
-    email: 'antonio@proton.me',
-    password: '123456',
-    age: 20,
+    email: 'antonio',
+    password: '12345',
+    age: "a",
     city: 'madrid',
     interests: 'programming',
     recibeOffers: true
@@ -13,13 +14,13 @@ good_user = {
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
-    server = app.listen(4000)
+    server = app.listen(4001)
 })
 
 // Después de ejecutar los tests, se cierra el servidor y la conexión a la base de datos
 afterAll(done => {
     server.close();
-    db.close();
+    sequelize.close();
     done();
 });
 

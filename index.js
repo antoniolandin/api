@@ -1,4 +1,4 @@
-const app = require('./src/app')
+const { app } = require('./src/app')
 const colors = require('colors')
 
 // El puerto es obtenido desde las variables de entorno, si no existe, se usa el puerto 3000

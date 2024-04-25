@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 const colors = require('colors')
+const { sequelize } = require("./models")
 
 // Creamos la aplicación express
 const app = express()
@@ -10,20 +11,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Conectamos a la base de datos
-const { db, dbConnectMySql } = require("./config/mysql")
-
-if (process.env.ENGINE_DB === 'nosql'){
-    dbConnect()
-}
-else{
-        // Crea las colecciones por defecto si no existieran
-        dbConnectMySql()
-        db.sync() // Crea las tablas en la base de datos si no existieran
-}
-
 // Rutas
 app.use('/api', require('./routes'))
 
 // Exportamos la aplicación para usarla en otros archivos
-module.exports = {app, db}
+module.exports = app
