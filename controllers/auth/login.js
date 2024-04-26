@@ -1,6 +1,6 @@
 const { user } = require('../../models')
 const { handleHttpError } = require('../../utils/handleError')
-const { encryptPassword, comparePassword } = require('../../utils/handlePassword')
+const { comparePassword } = require('../../utils/handlePassword')
 const { tokenSign } = require('../../utils/handleJwt')
 const colors = require('colors')
 const log = require('../../utils/handleConsoleLog')
