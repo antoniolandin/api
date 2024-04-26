@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
                     len: {
                         args: [3, 20],
                         msg: 'El nombre debe tener entre 3 y 20 caracteres'
+                    },
+                    isString: (value) => {
+                        if (typeof value !== 'string') {
+                            throw new Error('El nombre debe ser una cadena de texto');
+                        }
                     }
                 }
             },
@@ -53,6 +58,11 @@ module.exports = (sequelize, DataTypes) => {
                     len: {
                         args: [3, 30],
                         msg: 'La dirección debe tener entre 3 y 30 caracteres'
+                    },
+                    isString: (value) => {
+                        if (typeof value !== 'string') {
+                            throw new Error('La dirección debe ser una cadena de texto');
+                        }
                     }
                 }
             },
@@ -91,6 +101,11 @@ module.exports = (sequelize, DataTypes) => {
                     len: {
                         args: [3, 20],
                         msg: 'La ciudad debe tener entre 3 y 20 caracteres'
+                    },
+                    isString: (value) => {
+                        if (typeof value !== 'string') {
+                            throw new Error('La ciudad debe ser una cadena de texto');
+                        }
                     }
                 }
             },
@@ -100,6 +115,11 @@ module.exports = (sequelize, DataTypes) => {
                     len: {
                         args: [3, 20],
                         msg: 'La actividad debe tener entre 3 y 20 caracteres'
+                    },
+                    isString: (value) => {
+                        if (typeof value !== 'string') {
+                            throw new Error('La actividad debe ser una cadena de texto');
+                        }
                     }
                 }
             },
@@ -109,6 +129,11 @@ module.exports = (sequelize, DataTypes) => {
                     len: {
                         args: [3, 255],
                         msg: 'El resumen debe tener entre 3 y 255 caracteres'
+                    },
+                    isString: (value) => {
+                        if (typeof value !== 'string') {
+                            throw new Error('El resumen debe ser una cadena de texto');
+                        }
                     }
                 }
             },

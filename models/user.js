@@ -25,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
                 len: {
                     args: [2, 30],
                     msg: 'El nombre debe tener entre 2 y 30 caracteres'
+                },
+                isString: (value) => {
+                    if (typeof value !== 'string') {
+                        throw new Error('El nombre debe ser un string');
+                    }
                 }
             }
         },
@@ -61,6 +66,11 @@ module.exports = (sequelize, DataTypes) => {
                 notNull: {
                     args: true,
                     msg: 'La contraseña es obligatoria'
+                },
+                isString: (value) => {
+                    if (typeof value !== 'string') {
+                        throw new Error('La contraseña debe ser un string');
+                    }
                 }
             }
         },
@@ -70,7 +80,11 @@ module.exports = (sequelize, DataTypes) => {
                 isInt: {
                     args: true,
                     msg: 'La edad debe ser un número entero'
-                }
+                },
+                max: {
+                    args: 150,
+                    msg: 'La edad máxima es 150'
+                },
             }
         },
         city: {
@@ -83,6 +97,11 @@ module.exports = (sequelize, DataTypes) => {
                 len: {
                     args: [2, 30],
                     msg: 'La ciudad debe tener entre 2 y 30 caracteres'
+                },
+                isString: (value) => {
+                    if (typeof value !== 'string') {
+                        throw new Error('La ciudad debe ser un string');
+                    }
                 }
             }
         },
@@ -96,6 +115,11 @@ module.exports = (sequelize, DataTypes) => {
                 len: {
                     args: [2, 255],
                     msg: 'Los intereses deben tener entre 2 y 255 caracteres'
+                },
+                isString: (value) => {
+                    if (typeof value !== 'string') {
+                        throw new Error('Los intereses deben ser un string');
+                    }
                 }
             }
         },

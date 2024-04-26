@@ -7,7 +7,7 @@
                 "name": "antonio",
                 "email": "antonio",
                 "password": "12345",
-                "age": "20",
+                "age": "1000",
                 "city": "madrid",
                 "interests": "programming",
                 "recibeOffers": true
@@ -26,6 +26,21 @@
                 "city": "",
                 "interests": "",
                 "recibeOffers": ""
+            },
+            "expected": {
+                    "status": 400
+            }
+        },
+        {
+            "title": "Usuario con campos numéricos",
+            "user": {
+                "name": 3342,
+                "email": 83232,
+                "password": 123456,
+                "age": 20,
+                "city": 132322,
+                "interests": 3214,
+                "recibeOffers": 327
             },
             "expected": {
                     "status": 400
