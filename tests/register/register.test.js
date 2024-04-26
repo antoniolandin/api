@@ -46,10 +46,12 @@ describe('POST /api/auth/register', () => {
 // Se ejecutan los tests
     describe.each(table)('$title', ({ tests }) => {
         test.each(tests)('$title', async ({ user, expected }) => {
+            // Se envía la petición al servidor
             const response = await request(app)
                 .post('/api/auth/register')
                 .send(user)
-
+            
+            // Se comprueba que la respuesta del servidor sea la esperada
             expect(response.status).toBe(expected.status)
 
             if (expected.body) {

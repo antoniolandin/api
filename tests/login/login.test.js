@@ -51,10 +51,6 @@ const table = tests.map(test => {
 
 // Test para el endpoint POST /login
 describe('POST /login', () => {
-   
-    // Mostramos el usuario de prueba
-    console.log(JSON.stringify(user))
-
     // Primero, registramos un usuario de prueba
     describe('Registrar usuario de prueba', () => {      
         it('Debería registrar un usuario', async () => {
@@ -70,9 +66,6 @@ describe('POST /login', () => {
     describe('Pruebas de login', () => {
         describe.each(table)('$title', ({ tests }) => {
             test.each(tests)('$title', async ({ login, expected }) => {
-                // Mostramos los credenciales de login
-                console.log(JSON.stringify(login))
-                
                 // Hacemos la petición POST /login
                 const res = await request(app)
                     .post('/api/auth/login')

@@ -3,6 +3,7 @@ const { handleHttpError } = require('../utils/handleError')
 const { encryptPassword, comparePassword } = require('../utils/handlePassword')
 const { tokenSign } = require('../utils/handleJwt')
 const colors = require('colors')
+const log = require('../utils/handleConsoleLog')
 
 // Función para registrar un usuario en la base de datos
 register = async (req, res) => {
@@ -20,22 +21,34 @@ register = async (req, res) => {
         }
         
         // Mostramos en consola que el usuario ha sido registrado correctamente
-        console.log("Usuario ".green + userData.email.brightBlue + " registrado correctamente".green)
+        log(
+            "Registro exitoso de usuario:".bgGreen,
+            JSON.stringify(req.body, null, 2).brightYellow,
+            "Usuario ".green + userData.email.brightBlue + " registrado correctamente".green
+        )
+
         // Enviamos al cliente el token y los datos del usuario
         res.status(201).json(data)
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al registrar el usuario
-       
-        // Extraemos todos los errores del objeto error
-        errores = error.errors.map(e => e.message)
+        if (error.errors) {
+            // Extraemos todos los errores del objeto error
+            errores = error.errors.map(e => e.message)
 
-        // Juntamos todos los errores en un solo string
-        mensaje_error = errores.join('\n')
-
-        console.log("Error al registrar usuario:".bgRed)
-        console.log(mensaje_error.brightRed)        
-
+            // Juntamos todos los errores en un solo string
+            mensaje_error = errores.join('\n')
+        }
+        else {
+            mensaje_error = error.message
+        }
+    
+        log(
+            "Error al registrar usuario:".bgRed,
+            JSON.stringify(req.body, null, 2).brightYellow,
+            mensaje_error.brightRed
+        )
+               
         // Enviamos al cliente un mensaje de error
         handleHttpError(res, mensaje_error, 400)
     } 
@@ -43,6 +56,7 @@ register = async (req, res) => {
 
 // Función para iniciar sesión (con email y contraseña)
 login = async (req, res) => {
+    
     try {
         // Buscamos al usuario en la base de datos
         const userData = await user.findOne({
@@ -53,10 +67,13 @@ login = async (req, res) => {
 
         // Verificamos si el usuario existe
         if (!userData) {
-            // Mostramos en consola que el usuario no existe
-            console.log("Error en login:".bgRed)
-            console.log("Usuario ".red + req.body.email.toString().brightRed + " no existe".red
+            // Mostramos en consola que el usuario no existe 
+            log(
+                "Error en login:".bgRed,
+                JSON.stringify(req.body, null, 2).brightYellow,
+                "Usuario ".red + req.body.email.toString().brightRed + " no existe".red
             )
+
             // Enviamos al cliente un mensaje de error
             handleHttpError(res, 'Usuario no existe', 404)
             return
@@ -67,8 +84,11 @@ login = async (req, res) => {
 
         if (!passwordMatch) {
             // Mostramos en consola que la contraseña es incorrecta
-            console.log("Error en login:".bgRed)
-            console.log("Contraseña incorrecta".red)
+            log(
+                "Error en login:".bgRed,
+                JSON.stringify(req.body, null, 2).brightYellow,
+                "Contraseña incorrecta".red
+            )
 
             // Enviamos al cliente un mensaje de error
             handleHttpError(res, 'Contraseña incorrecta', 401)
@@ -85,16 +105,23 @@ login = async (req, res) => {
         }
 
         // Mostramos en consola que el usuario ha iniciado sesión correctamente
-        console.log("Usuario ".green + userData.email.brightBlue + " ha iniciado sesión correctamente".green)
+        log(
+            "Inicio de sesión exitoso:".bgGreen,
+            JSON.stringify(req.body, null, 2).brightYellow,
+            "Usuario ".green + userData.email.brightBlue + " ha iniciado sesión correctamente".green
+        )
 
         // Enviamos al cliente el token y los datos del usuario
         res.status(200).json(data)
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al iniciar sesión
+        log(
+            "Error en login:".bgRed,
+            JSON.stringify(req.body, null, 2).brightYellow,
+            error.message.brightRed
+        )
 
-        console.log("Error en login:".bgRed)
-        console.log("Error al iniciar sesión:\n".red + error.message.brightRed)
         // Enviamos al cliente un mensaje de error
         handleHttpError(res, error.message, 401)
     }
