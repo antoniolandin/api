@@ -9,18 +9,18 @@ const log = require('../../utils/handleConsoleLog')
 login = async (req, res) => {
     
     try {
-        // Buscamos al usuario en la base de datos
+        // Buscamos al admin en la base de datos
         const adminData = await admin.findOne({
             where : {
                 email: req.body.email
             }
         })
 
-        // Verificamos si el usuario existe
+        // Verificamos si el admin existe
         if (!adminData) {
-            // Mostramos en consola que el usuario no existe 
+            // Mostramos en consola que el admin no existe 
             log(
-                "Error en login:".bgRed,
+                "Error en login admin:".bgRed,
                 JSON.stringify(req.body, null, 2).brightYellow,
                 "Admin ".red + req.body.email.toString().brightRed + " no existe".red
             )
@@ -36,7 +36,7 @@ login = async (req, res) => {
         if (!passwordMatch) {
             // Mostramos en consola que la contraseña es incorrecta
             log(
-                "Error en login:".bgRed,
+                "Error en login admin:".bgRed,
                 JSON.stringify(req.body, null, 2).brightYellow,
                 "Contraseña incorrecta".red
             )
@@ -46,7 +46,7 @@ login = async (req, res) => {
             return
         }
 
-        // Eliminamos la contraseña del objeto del usuario (motivos de seguridad)
+        // Eliminamos la contraseña del objeto del admin (motivos de seguridad)
         adminData.set('password', undefined, { strict: false })
 
         // Creamos la respuesta que enviaremos al cliente
@@ -55,20 +55,20 @@ login = async (req, res) => {
             admin: adminData
         }
 
-        // Mostramos en consola que el usuario ha iniciado sesión correctamente
+        // Mostramos en consola que el admin ha iniciado sesión correctamente
         log(
             "Inicio de sesión exitoso:".bgGreen,
             JSON.stringify(req.body, null, 2).brightYellow,
             "Admin ".green + adminData.email.brightBlue + " ha iniciado sesión correctamente".green
         )
 
-        // Enviamos al cliente el token y los datos del usuario
+        // Enviamos al cliente el token y los datos del admin
         res.status(200).json(data)
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al iniciar sesión
         log(
-            "Error en login:".bgRed,
+            "Error en login admin:".bgRed,
             JSON.stringify(req.body, null, 2).brightYellow,
             error.message.brightRed
         )

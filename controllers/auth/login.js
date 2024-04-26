@@ -20,7 +20,7 @@ login = async (req, res) => {
         if (!userData) {
             // Mostramos en consola que el usuario no existe 
             log(
-                "Error en login:".bgRed,
+                "Error en login usuario:".bgRed,
                 JSON.stringify(req.body, null, 2).brightYellow,
                 "Usuario ".red + req.body.email.toString().brightRed + " no existe".red
             )
@@ -36,7 +36,7 @@ login = async (req, res) => {
         if (!passwordMatch) {
             // Mostramos en consola que la contraseña es incorrecta
             log(
-                "Error en login:".bgRed,
+                "Error en login usuario:".bgRed,
                 JSON.stringify(req.body, null, 2).brightYellow,
                 "Contraseña incorrecta".red
             )
@@ -68,7 +68,7 @@ login = async (req, res) => {
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al iniciar sesión
         log(
-            "Error en login:".bgRed,
+            "Error en login usuario:".bgRed,
             JSON.stringify(req.body, null, 2).brightYellow,
             error.message.brightRed
         )
