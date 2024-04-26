@@ -14,7 +14,7 @@
         {
             "title": "Login con contraseña incorrecta",
             "login": {
-                "email": "loginTest@proton.me",
+                "email": "testLogin@proton.me",
                 "password": "654321"
             },
             "expected": {

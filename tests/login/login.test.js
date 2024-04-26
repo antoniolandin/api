@@ -17,8 +17,8 @@ afterAll(done => {
 
 // Definimos un usuario de prueba
 const user = {
-    name: "loginTest",
-    email: "loginTest@proton.me",
+    name: "testLogin",
+    email: "testLogin@proton.me",
     password: "123456"
 }
 

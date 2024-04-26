@@ -14,7 +14,7 @@
         {
             "title": "Contraseña vacía",
             "login": {
-                "email": "loginTest@proton.me",
+                "email": "testLogin@proton.me",
                 "password": ""
             },
             "expected": {
@@ -34,7 +34,7 @@
         {
             "title": "Login con contraseña numérica",
             "login": {
-                "email": "loginTest@proton.me",
+                "email": "testLogin@proton.me",
                 "password": 123456
             },
             "expected": {
