@@ -1,11 +1,11 @@
 const request = require('supertest')
 const app = require('../../app')
-const { sequelize } = require('../../models')
+const { sequelize, admin } = require('../../models')
 const fs = require('fs')
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
-    server = app.listen(4001)
+    server = app.listen(4002)
 })
 
 // Después de ejecutar los tests, se cierra el servidor y la conexión a la base de datos
@@ -16,14 +16,14 @@ afterAll(done => {
 })
 
 // Definimos un usuario de prueba
-const user = {
-    name: "loginTest",
-    email: "loginTest@proton.me",
-    password: "123456"
+const test_admin = {
+    name: "testAdmin",
+    email: "testAdmin@proton.me",
+    password: "12345678"
 }
 
 // Se obtienen los tests de los archivos JSON
-const files = fs.readdirSync('./tests/login/tests').filter(file => file.endsWith('.json'))
+const files = fs.readdirSync('./tests/admin/tests').filter(file => file.endsWith('.json'))
 
 const tests = files.map(file => {
     return require(`./tests/${file}`)
@@ -50,15 +50,16 @@ const table = tests.map(test => {
 })
 
 // Test para el endpoint POST /login
-describe('POST /api/auth/login', () => {
+describe('POST /api/admin/login', () => {
     // Primero, registramos un usuario de prueba
-    describe('Registrar usuario de prueba', () => {      
-        it('Debería registrar un usuario', async () => {
-            const res = await request(app)
-                .post('/api/auth/register')
-                .send(user)
-            expect(res.statusCode).toEqual(201)
-            expect(res.body).toHaveProperty('token')
+    describe('Registrar al admin de prueba', () => {      
+        it('Debería registrar un admin', async () => {
+            const res = await admin.create(test_admin)
+            
+            // Esperamos que el objeto devuelto tenga las propiedades esperadas
+            expect(res).toHaveProperty('id')
+            expect(res).toHaveProperty('name', test_admin.name)
+            expect(res).toHaveProperty('email', test_admin.email)
         })
     })
     
@@ -68,7 +69,7 @@ describe('POST /api/auth/login', () => {
             test.each(tests)('$title', async ({ login, expected }) => {
                 // Hacemos la petición POST /login
                 const res = await request(app)
-                    .post('/api/auth/login')
+                    .post('/api/admin/login')
                     .send(login)
                 
                 // Esperamos que el status de la respuesta sea el esperado

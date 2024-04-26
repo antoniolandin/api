@@ -1,0 +1,25 @@
+{
+    "title": "Login erroneno",
+    "tests": [
+        {
+            "title": "Login con usuario incorrecto",
+            "login": {
+                "email": "error@proton.me",
+                "password": "12345678"
+            },
+            "expected": {
+                "status": 404
+            }
+        },
+        {
+            "title": "Login con contraseña incorrecta",
+            "login": {
+                "email": "testAdmin@proton.me",
+                "password": "87654321"
+            },
+            "expected": {
+                "status": 401
+            }
+        }
+    ]
+}
