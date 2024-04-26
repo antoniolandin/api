@@ -17,23 +17,22 @@ module.exports = (sequelize, DataTypes) => {
     {
         name: {
             type: DataTypes.STRING,
-            allowNull: {
-                args: false,
-                msg: 'El nombre es obligatorio'
-            },
+            allowNull: false,
             validate: {
                 notEmpty: {
                     args: true,
                     msg: 'El nombre no puede estar vacío'
                 }
+            },
+            validate: {
+                notNull: {
+                    msg: 'El nombre es obligatorio'
+                }
             }
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: {
-                args: false,
-                msg: 'El email es obligatorio'
-            },
+            allowNull: false,
             unique: {
                 args: true,
                 msg: 'El email ya está en uso'
@@ -42,19 +41,24 @@ module.exports = (sequelize, DataTypes) => {
                 isEmail: {
                     args: true,
                     msg: 'El email debe ser un correo válido'
+                },
+                notNull: {
+                    args: true,
+                    msg: 'El email es obligatorio'
                 }
             }
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: {
-                args: false,
-                msg: 'La contraseña es obligatoria'
-            },
+            allowNull: false,
             validate: {
                 len: {
                     args: [6, 255],
                     msg: 'La contraseña debe tener al menos 6 caracteres'
+                },
+                notNull: {
+                    args: true,
+                    msg: 'La contraseña es obligatoria'
                 }
             }
         },
