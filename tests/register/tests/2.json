@@ -1,5 +1,5 @@
 {   
-    "title": "Registro éxitoso de usuario",
+    "title": "Error en la creación de usuarios",
     "tests": [
         {
             "title": "Usuario con algunos campos incorrectos",

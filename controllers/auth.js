@@ -25,17 +25,18 @@ register = async (req, res) => {
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al registrar el usuario
-        
+       
+        // Extraemos todos los errores del objeto error
         errores = error.errors.map(e => e.message)
 
-        console.log("Error al registrar usuario:".bgRed)
+        // Juntamos todos los errores en un solo string
+        mensaje_error = errores.join('\n')
 
-        errores.forEach(e => {
-            console.log(e.brightRed)
-        })
+        console.log("Error al registrar usuario:".bgRed)
+        console.log(mensaje_error.brightRed)        
 
         // Enviamos al cliente un mensaje de error
-        handleHttpError(res, error.message, 400)
+        handleHttpError(res, mensaje_error, 400)
     } 
 }
 

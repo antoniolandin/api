@@ -16,35 +16,45 @@ afterAll(done => {
 })
 
 // Se obtienen los tests de los archivos JSON
-const files = fs.readdirSync('./tests/register').filter(file => file.endsWith('.json'))
+const files = fs.readdirSync('./tests/register/tests').filter(file => file.endsWith('.json'))
 
 const tests = files.map(file => {
-    return require(`./${file}`)
+    return require(`./tests/${file}`)
 })
 
+// Ahora tenemos que procesar los tests para que sean ejecutados por Jest
+// Cada test tiene un título y un array de tests
+// Cada test tiene un título, un usuario y un objeto expected
+// El objeto expected tiene un status y un body
+const table = tests.map(test => {
+    return {
+        title: test.title,
+        tests: test.tests.map(testCase => {
+            return {
+                title: testCase.title,
+                user: testCase.user,
+                expected: {
+                    status: testCase.expected.status,
+                    body: testCase.expected.body
+                }
+            }
+        })
+    }
+})
+
+describe('POST /api/auth/register', () => {
 // Se ejecutan los tests
-describe('Register', () => {
-    tests.forEach(test => {
-        describe(test.title, () => {
-            test.tests.forEach(testCase => {
-                it(testCase.title, async () => {
-                    
-                    // Se imprime el usuario que se está probando
-                    console.log(JSON.stringify(testCase.user))
-                    
-                    // Se realiza la petición al servidor
-                    const response = await request(app)
-                        .post('/api/auth/register')
-                        .send(testCase.user)
+    describe.each(table)('$title', ({ tests }) => {
+        test.each(tests)('$title', async ({ user, expected }) => {
+            const response = await request(app)
+                .post('/api/auth/register')
+                .send(user)
 
-                    // Se espera que el status y el body de la respuesta sean iguales a los esperados
-                    expect(response.status).toBe(testCase.expected.status)
+            expect(response.status).toBe(expected.status)
 
-                    if (testCase.expected.body) {
-                        expect(response.body).toEqual(testCase.expected.body)
-                    }
-                })
-            })
+            if (expected.body) {
+                expect(response.body).toEqual(expected.body)
+            }
         })
     })
 })
