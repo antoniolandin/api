@@ -1,0 +1,45 @@
+{
+    "title": "Parámetros extraños",
+    "tests": [
+        {
+            "title": "Email vacío",
+            "login": {
+                "email": "",
+                "password": "123456"
+            },
+            "expected": {
+                "status": 404
+            }
+        },
+        {
+            "title": "Contraseña vacía",
+            "login": {
+                "email": "loginTest@proton.me",
+                "password": ""
+            },
+            "expected": {
+                "status": 401
+            }
+        },
+        {
+            "title": "Login con email numérico",
+            "login": {
+                "email": 3,
+                "password": "123456"
+            },
+            "expected": {
+                "status": 404
+            }
+        },
+        {
+            "title": "Login con contraseña numérica",
+            "login": {
+                "email": "loginTest@proton.me",
+                "password": 123456
+            },
+            "expected": {
+                "status": 401
+            }
+        }
+    ]
+}

@@ -3,7 +3,6 @@
     "tests": [
         {
             "title": "Registro éxitoso",
-            "description": "El usuario debe registrarse correctamente",
             "user": {
                 "name": "antonio",
                 "email": "antonio@proton.me",

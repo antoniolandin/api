@@ -4,6 +4,7 @@ const { encryptPassword, comparePassword } = require('../utils/handlePassword')
 const { tokenSign } = require('../utils/handleJwt')
 const colors = require('colors')
 
+// Función para registrar un usuario en la base de datos
 register = async (req, res) => {
     try {
         // Creamos al usuario en la base de datos
@@ -40,17 +41,21 @@ register = async (req, res) => {
     } 
 }
 
+// Función para iniciar sesión (con email y contraseña)
 login = async (req, res) => {
     try {
         // Buscamos al usuario en la base de datos
-        const userData = await userModel.findOne({
-            id: req.body.id
+        const userData = await user.findOne({
+            where : {
+                email: req.body.email
+            }
         })
 
         // Verificamos si el usuario existe
         if (!userData) {
             // Mostramos en consola que el usuario no existe
-            console.log("Usuario ".red + req.body.id.toString().brightRed + " no existe".red
+            console.log("Error en login:".bgRed)
+            console.log("Usuario ".red + req.body.email.toString().brightRed + " no existe".red
             )
             // Enviamos al cliente un mensaje de error
             handleHttpError(res, 'Usuario no existe', 404)
@@ -62,7 +67,9 @@ login = async (req, res) => {
 
         if (!passwordMatch) {
             // Mostramos en consola que la contraseña es incorrecta
+            console.log("Error en login:".bgRed)
             console.log("Contraseña incorrecta".red)
+
             // Enviamos al cliente un mensaje de error
             handleHttpError(res, 'Contraseña incorrecta', 401)
             return
@@ -85,12 +92,15 @@ login = async (req, res) => {
     }
     catch (error) {
         // Mostramos en consola que ha ocurrido un error al iniciar sesión
+
+        console.log("Error en login:".bgRed)
         console.log("Error al iniciar sesión:\n".red + error.message.brightRed)
         // Enviamos al cliente un mensaje de error
-        handleHttpError(res, error.message, 400)
+        handleHttpError(res, error.message, 401)
     }
 }
 
+// Exportamos las funciones
 module.exports = {
     register,
     login
