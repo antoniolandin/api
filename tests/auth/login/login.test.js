@@ -1,6 +1,6 @@
 const request = require('supertest')
-const app = require('../../app')
-const { sequelize } = require('../../models')
+const app = require('../../../app')
+const { sequelize } = require('../../../models')
 const fs = require('fs')
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
@@ -23,7 +23,7 @@ const user = {
 }
 
 // Se obtienen los tests de los archivos JSON
-const files = fs.readdirSync('./tests/login/tests').filter(file => file.endsWith('.json'))
+const files = fs.readdirSync('./tests/auth/login/tests').filter(file => file.endsWith('.json'))
 
 const tests = files.map(file => {
     return require(`./tests/${file}`)
