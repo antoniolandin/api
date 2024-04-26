@@ -1,0 +1,35 @@
+{   
+    "title": "Error registro por campos demasiado largos",
+    "tests": [
+        {
+            "title": "Registro con nombre demasiado largo",
+            "user": {
+                "name": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
+                "email": "largo@proton.me",
+                "password": "123456",
+                "age": 20,
+                "city": "madrid",
+                "interests": "programming",
+                "recibeOffers": true
+            },
+            "expected": {
+                    "status": 400
+            }
+        },
+        {
+            "title": "todos los campos demasiado largos",
+            "user": {
+                "name": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
+                "email": "asdfghjklñasdfghjklasdfghjklasdfhklhfd@proton.me",
+                "password": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
+                "age": 20,
+                "city": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
+                "interests": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
+                "recibeOffers": true
+            },
+            "expected": {
+                    "status": 400
+            }
+        }
+    ]
+}

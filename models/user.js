@@ -19,14 +19,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                notEmpty: {
-                    args: true,
-                    msg: 'El nombre no puede estar vacío'
-                }
-            },
-            validate: {
                 notNull: {
                     msg: 'El nombre es obligatorio'
+                },
+                len: {
+                    args: [2, 30],
+                    msg: 'El nombre debe tener entre 2 y 30 caracteres'
                 }
             }
         },
@@ -45,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
                 notNull: {
                     args: true,
                     msg: 'El email es obligatorio'
+                },
+                len: {
+                    args: [4, 30],
+                    msg: 'El email debe tener entre 4 y 30 caracteres'
                 }
             }
         },
@@ -54,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 len: {
                     args: [6, 255],
-                    msg: 'La contraseña debe tener al menos 6 caracteres'
+                    msg: 'La contraseña debe tener entre 6 y 255 caracteres'
                 },
                 notNull: {
                     args: true,
@@ -77,6 +79,10 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: {
                     args: true,
                     msg: 'La ciudad no puede estar vacía'
+                },
+                len: {
+                    args: [2, 30],
+                    msg: 'La ciudad debe tener entre 2 y 30 caracteres'
                 }
             }
         },
@@ -86,6 +92,10 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: {
                     args: true,
                     msg: 'Los intereses no pueden estar vacíos'
+                },
+                len: {
+                    args: [2, 255],
+                    msg: 'Los intereses deben tener entre 2 y 255 caracteres'
                 }
             }
         },
