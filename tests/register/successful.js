@@ -15,7 +15,7 @@ good_user = {
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
     server = app.listen(4000)
-})
+   })
 
 // Después de ejecutar los tests, se cierra el servidor y la conexión a la base de datos
 afterAll(done => {
@@ -27,6 +27,10 @@ afterAll(done => {
 // Test de registro de usuario
 describe('Post Endpoints', () => {
   it('debería registrar a un usuario correctamente', async () => {
+
+    // Se imprime el usuario que se va a registrar
+    console.log(good_user)
+
     const res = await request(app)
       .post('/api/auth/register')
       .send(good_user)

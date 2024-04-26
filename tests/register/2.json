@@ -1,0 +1,35 @@
+{   
+    "title": "Registro éxitoso de usuario",
+    "tests": [
+        {
+            "title": "Usuario con algunos campos incorrectos",
+            "user": {
+                "name": "antonio",
+                "email": "antonio",
+                "password": "12345",
+                "age": "20",
+                "city": "madrid",
+                "interests": "programming",
+                "recibeOffers": true
+            },
+            "expected": {
+                    "status": 400
+            }
+        },
+        {
+            "title": "Usuario con todos los campos vacíos",
+            "user": {
+                "name": "",
+                "email": "",
+                "password": "",
+                "age": "",
+                "city": "",
+                "interests": "",
+                "recibeOffers": ""
+            },
+            "expected": {
+                    "status": 400
+            }
+        }
+    ]
+}

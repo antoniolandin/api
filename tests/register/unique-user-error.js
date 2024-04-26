@@ -2,6 +2,7 @@ const request = require('supertest')
 const app = require('../../app')
 const { sequelize } = require('../../models')
 
+// Usuarios de prueba para el test
 users = [
     {
         name: 'Paco',
@@ -23,6 +24,9 @@ users = [
     }
 ]
 
+// Códigos de respuesta esperados
+expected_codes = [201, 400]
+
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
     server = app.listen(4002)
@@ -37,17 +41,17 @@ afterAll(done => {
 
 // Test de registro de usuario
 describe('Post Endpoints', () => {
-  it('comprobar que salta el error de unicidad de email', async () => {
-    const res_1 = await request(app)
-      .post('/api/auth/register')
-      .send(users[0])
+    it('comprobar que salta el error de unicidad de email', async () => {
+ 
+        // Registramos los usuarios y comprobamos que se devuelven los códigos de respuesta esperados
+        for (const user of users) { 
+            console.log(user)
 
-     const res_2 = await request(app) 
-        .post('/api/auth/register')
-        .send(users[1])
-    
-    // Debe devolver un status 201 para el primer usuario y un status 400 para el segundo
-    expect(res_1.statusCode).toEqual(201)
-    expect(res_2.statusCode).toEqual(400)
-  })
+            const res = await request(app)
+                .post('/api/auth/register')
+                .send(user)
+
+            expect(res.statusCode).toEqual(expected_codes.shift())
+        }
+    })
 })

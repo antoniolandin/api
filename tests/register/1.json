@@ -1,0 +1,21 @@
+{   
+    "title": "Registro éxitoso de usuario",
+    "tests": [
+        {
+            "title": "Registro éxitoso",
+            "description": "El usuario debe registrarse correctamente",
+            "user": {
+                "name": "antonio",
+                "email": "antonio@proton.me",
+                "password": "123456",
+                "age": 20,
+                "city": "madrid",
+                "interests": "programming",
+                "recibeOffers": true
+            },
+            "expected": {
+                    "status": 201
+            }
+        } 
+    ]
+}
