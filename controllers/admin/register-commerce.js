@@ -5,7 +5,7 @@ const colors = require('colors')
 const log = require('../../utils/handleConsoleLog')
 
 // Función para registrar un comercio en la base de datos
-register = async (req, res) => {
+register_commerce = async (req, res) => {
     try {
         // Creamos al comercio en la base de datos
         const commerceData = await commerce.create(req.body)
@@ -52,4 +52,4 @@ register = async (req, res) => {
     } 
 }
 
-module.exports = register
+module.exports = register_commerce

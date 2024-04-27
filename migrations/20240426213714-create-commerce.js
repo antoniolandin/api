@@ -40,10 +40,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       scoring: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+          defaultValue: 0
       },
       numReviews: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,

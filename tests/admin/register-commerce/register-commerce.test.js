@@ -24,7 +24,7 @@ const tests = files.map(file => {
 
 // Ahora tenemos que procesar los tests para que sean ejecutados por Jest
 // Cada test tiene un título y un array de tests
-// Cada test tiene un título, un usuario y un objeto expected
+// Cada test tiene un título, un comercio y un objeto expected
 // El objeto expected tiene un status y un body
 const table = tests.map(test => {
     return {
@@ -32,7 +32,7 @@ const table = tests.map(test => {
         tests: test.tests.map(testCase => {
             return {
                 title: testCase.title,
-                user: testCase.user,
+                commerce: testCase.commerce,
                 expected: {
                     status: testCase.expected.status,
                     body: testCase.expected.body
@@ -45,11 +45,11 @@ const table = tests.map(test => {
 describe('POST /api/auth/register', () => {
 // Se ejecutan los tests
     describe.each(table)('$title', ({ tests }) => {
-        test.each(tests)('$title', async ({ user, expected }) => {
+        test.each(tests)('$title', async ({ commerce, expected }) => {
             // Se envía la petición al servidor
             const response = await request(app)
-                .post('/api/auth/register')
-                .send(user)
+                .post('/api/admin/register-commerce')
+                .send(commerce)
             
             // Se comprueba que la respuesta del servidor sea la esperada
             expect(response.status).toBe(expected.status)

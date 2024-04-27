@@ -7,7 +7,7 @@
                 "name": "antonio",
                 "email": "antonio",
                 "password": "12345",
-                "age": "1000",
+                "age": 1000,
                 "city": "madrid",
                 "interests": "programming",
                 "recibeOffers": true
