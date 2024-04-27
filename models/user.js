@@ -81,6 +81,10 @@ module.exports = (sequelize, DataTypes) => {
                     args: true,
                     msg: 'La edad debe ser un número entero'
                 },
+                min: {
+                    args: [0],
+                    msg: 'La edad mínima es 0'
+                },
                 max: {
                     args: [150],
                     msg: 'La edad máxima es 150'

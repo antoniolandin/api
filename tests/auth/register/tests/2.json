@@ -1,13 +1,13 @@
 {   
-    "title": "Error en la creación de usuarios",
+    "title": "Errores varios en el registro de usuarios",
     "tests": [
         {
-            "title": "Usuario con algunos campos incorrectos",
+            "title": "Email incorrecto",
             "user": {
                 "name": "antonio",
                 "email": "antonio",
                 "password": "12345",
-                "age": 1000,
+                "age": 10,
                 "city": "madrid",
                 "interests": "programming",
                 "recibeOffers": true
@@ -17,7 +17,7 @@
             }
         },
         {
-            "title": "Usuario con todos los campos vacíos",
+            "title": "Todos los campos vacíos",
             "user": {
                 "name": "",
                 "email": "",
@@ -32,12 +32,12 @@
             }
         },
         {
-            "title": "Usuario con campos numéricos",
+            "title": "Campos de tipo incorrecto",
             "user": {
                 "name": 3342,
                 "email": 83232,
                 "password": 123456,
-                "age": 20,
+                "age": "20",
                 "city": 132322,
                 "interests": 3214,
                 "recibeOffers": 327

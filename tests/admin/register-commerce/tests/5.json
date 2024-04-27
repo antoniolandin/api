@@ -1,0 +1,50 @@
+{
+    "title": "Error registro por campos con longitud incorrecta",   
+    "tests": [
+        {
+            "title": "Nombre demasiado largo",
+            "commerce": {
+                "name": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+                "CIF": "K12345678",
+                "address": "Calle Falsa 123",
+                "email": "lorem@proton.me",
+                "phone": "123456789"
+            },
+            "expected": {
+                "status": 400
+            }
+        },
+        {
+            "title": "Todos los campos demasiado largos",
+            "commerce": {
+                "name": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+                "CIF": "K12345678",
+                "address": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+                "email": "loremipsumdolorsitametconsecteturadipsicinge@proton.me",
+                "phone": "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789",
+                "city": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+                "activity": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+                "summary": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed"
+            },
+            "expected": {
+                "status": 400
+            }
+        },
+        {
+            "title": "Todos los campos muy cortos",
+            "commerce": {
+                "name": "l",
+                "CIF": "K1234567",
+                "address": "l",
+                "email": "l@p.m",
+                "phone": "12",
+                "city": "l",
+                "activity": "l",
+                "summary": "l"
+            },
+            "expected": {
+                "status": 400
+            }
+        }
+    ]
+}

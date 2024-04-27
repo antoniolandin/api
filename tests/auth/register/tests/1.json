@@ -1,8 +1,8 @@
 {   
-    "title": "Registro éxitoso de usuario",
+    "title": "Registro exitoso de usuario",
     "tests": [
         {
-            "title": "Registro éxitoso",
+            "title": "Parámetros correctos",
             "user": {
                 "name": "antonio",
                 "email": "antonio@proton.me",

@@ -2,7 +2,7 @@
     "title": "Login exitoso",
     "tests": [
         {
-            "title": "Login con usuario y contraseña correctos",
+            "title": "Usuario y contraseña correctos",
             "login": {
                 "email": "testLogin@proton.me",
                 "password": "123456"

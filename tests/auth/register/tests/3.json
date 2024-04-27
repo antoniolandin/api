@@ -1,5 +1,5 @@
 {   
-    "title": "Error de unicidad",
+    "title": "Error de unicidad en registro de usuario",
     "tests": [
         {
             "title": "Registro exitoso",
@@ -17,7 +17,7 @@
             }
         },
         {
-            "title": "Error al registrar usuario: email ya registrado",
+            "title": "Email ya registrado",
             "user": {
                 "name": "manolo",
                 "email": "paco@proton.me",

@@ -1,5 +1,5 @@
 {
-    "title": "Parámetros extraños",
+    "title": "Login con parámetros extraños",
     "tests": [
         {
             "title": "Email vacío",
@@ -22,7 +22,7 @@
             }
         },
         {
-            "title": "Login con email numérico",
+            "title": "Email numérico",
             "login": {
                 "email": 3,
                 "password": "12345678"
@@ -32,7 +32,7 @@
             }
         },
         {
-            "title": "Login con contraseña numérica",
+            "title": "Contraseña numérica",
             "login": {
                 "email": "testAdmin@proton.me",
                 "password": 12345678

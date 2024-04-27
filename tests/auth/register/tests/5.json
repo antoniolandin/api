@@ -1,8 +1,8 @@
 {   
-    "title": "Error registro por campos demasiado largos",
+    "title": "Error registro por campos con longitud incorrecta",
     "tests": [
         {
-            "title": "Registro con nombre demasiado largo",
+            "title": "Nombre demasiado largo",
             "user": {
                 "name": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
                 "email": "largo@proton.me",
@@ -17,14 +17,29 @@
             }
         },
         {
-            "title": "todos los campos demasiado largos",
+            "title": "Todos los campos demasiado largos",
             "user": {
                 "name": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
                 "email": "asdfghjklñasdfghjklasdfghjklasdfhklhfd@proton.me",
                 "password": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
-                "age": 20,
+                "age": 2000,
                 "city": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
                 "interests": "loremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibhnibhloremipsumdolorsitametconsecteturadipiscingelitvivamusacultriciesnibh",
+                "recibeOffers": true
+            },
+            "expected": {
+                    "status": 400
+            }
+        },
+        {
+            "title": "Todos los campos demasiado cortos",
+            "user": {
+                "name": "a",
+                "email": "a@b.c",
+                "password": "12345",
+                "age": -10,
+                "city": "a",
+                "interests": "a",
                 "recibeOffers": true
             },
             "expected": {

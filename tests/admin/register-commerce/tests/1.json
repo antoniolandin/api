@@ -2,7 +2,7 @@
     "title": "Registro exitoso",
     "tests": [
         {
-            "title": "Comercio con parámetros correctos",
+            "title": "Parámetros correctos",
             "commerce": {
                 "name": "test",
                 "CIF": "A12345678",

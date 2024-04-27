@@ -1,8 +1,8 @@
 {
-    "title": "Login erroneno",
+    "title": "Login con credenciales incorrectas",
     "tests": [
         {
-            "title": "Login con usuario incorrecto",
+            "title": "Usuario incorrecto",
             "login": {
                 "email": "error@proton.me",
                 "password": "123456"
@@ -12,7 +12,7 @@
             }
         },
         {
-            "title": "Login con contraseña incorrecta",
+            "title": "Contraseña incorrecta",
             "login": {
                 "email": "testLogin@proton.me",
                 "password": "654321"
