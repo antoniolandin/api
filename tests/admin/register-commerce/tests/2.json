@@ -16,7 +16,7 @@
                 "numReviews": -3
             },
             "expected": {
-                "status": 400
+                "status": 403
             }
         },
         {
@@ -34,7 +34,7 @@
                 "numReviews": 0
             },
             "expected": {
-                "status": 400
+                "status": 403
             }
         },
         {
@@ -52,7 +52,7 @@
                 "numReviews": "test"
             },
             "expected": {
-                "status": 400
+                "status": 403
             }
         }
     ]

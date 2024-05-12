@@ -50,7 +50,7 @@ describe('POST /api/auth/register', () => {
             const response = await request(app)
                 .post('/api/admin/register-commerce')
                 .send(commerce)
-            
+
             // Se comprueba que la respuesta del servidor sea la esperada
             expect(response.status).toBe(expected.status)
 

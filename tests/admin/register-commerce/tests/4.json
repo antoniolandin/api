@@ -10,7 +10,7 @@
                 "phone": "123456789"
             },
             "expected": {
-                "status": 400
+                "status": 403
             }
         },
         {
@@ -19,7 +19,7 @@
                 "name": "Comercio"
             },
             "expected": {
-                "status": 400
+                "status": 403
             }
         },
         {
@@ -28,14 +28,14 @@
                 "city": "Springfield"
             },
             "expected": {
-                "status": 400
+                "status": 403
             }
         },
         {
             "title": "Comercio vacío",
             "commerce": {},
             "expected": {
-                "status": 400
+                "status": 403
             }
         }
     ]

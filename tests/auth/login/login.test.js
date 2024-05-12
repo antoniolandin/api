@@ -57,6 +57,7 @@ describe('POST /api/auth/login', () => {
             const res = await request(app)
                 .post('/api/auth/register')
                 .send(user)
+
             expect(res.statusCode).toEqual(201)
             expect(res.body).toHaveProperty('token')
         })

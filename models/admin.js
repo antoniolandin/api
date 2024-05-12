@@ -16,51 +16,17 @@ module.exports = (sequelize, DataTypes) => {
     admin.init(
         {
             name: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    notNull: {
-                        msg: 'El nombre es obligatorio'
-                    },
-                    len: {
-                        args: [2, 30],
-                        msg: 'El nombre debe tener entre 2 y 30 caracteres'
-                    }
-                }
+                type: DataTypes.STRING
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false,
                 unique: {
                     args: true,
                     msg: 'El email ya está en uso'
-                },
-                validate: {
-                    isEmail: {
-                        args: true,
-                        msg: 'El email debe ser válido'
-                    },
-                    notNull: {
-                        msg: 'El email es obligatorio'
-                    },
-                    len: {
-                        args: [4, 100],
-                        msg: 'El email debe tener entre 4 y 100 caracteres'
-                    }
                 }
             },
             password: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    len: {
-                        args: [8, 255],
-                        msg: 'La contraseña debe tener al menos 8 caracteres'
-                    },
-                    notNull: {
-                        msg: 'La contraseña es obligatoria'
-                    }
-                }
+                type: DataTypes.STRING
             }
         },
         {

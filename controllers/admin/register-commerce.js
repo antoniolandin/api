@@ -1,7 +1,6 @@
 const { commerce } = require('../../models')
 const { handleHttpError } = require('../../utils/handleError')
 const { tokenSign } = require('../../utils/handleJwt')
-const colors = require('colors')
 const log = require('../../utils/handleConsoleLog')
 
 // Función para registrar un comercio en la base de datos

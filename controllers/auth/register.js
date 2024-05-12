@@ -30,6 +30,7 @@ register = async (req, res) => {
         res.status(201).json(data)
     }
     catch (error) {
+
         // Los errores de validación de Sequelize vienen en un objeto error.errors (lista de errores)
         if (error.errors) {
             // Extraemos todos los errores del objeto error

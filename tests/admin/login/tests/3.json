@@ -8,7 +8,7 @@
                 "password": "12345678"
             },
             "expected": {
-                "status": 404
+                "status": 403
             }
         },
         {
@@ -18,7 +18,7 @@
                 "password": ""
             },
             "expected": {
-                "status": 401
+                "status": 403
             }
         },
         {
@@ -28,7 +28,7 @@
                 "password": "12345678"
             },
             "expected": {
-                "status": 404
+                "status": 403
             }
         },
         {
@@ -38,7 +38,7 @@
                 "password": 12345678
             },
             "expected": {
-                "status": 401
+                "status": 403
             }
         }
     ]

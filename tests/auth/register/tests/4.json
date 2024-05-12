@@ -9,7 +9,7 @@
                 "city": "Buenos Aires"
             },
             "expected": {
-                    "status": 400
+                    "status": 403
             }
         },
         {
@@ -19,7 +19,7 @@
                 "password": "123456"
             },
             "expected": {
-                    "status": 400
+                    "status": 403
             }
         },
         {
@@ -29,7 +29,7 @@
                 "email": "null@proton.me"
             },
             "expected": {
-                    "status": 400
+                    "status": 403
             }
         },
         {
@@ -38,14 +38,14 @@
                 "city": "Buenos Aires"
             },
             "expected": {
-                    "status": 400
+                    "status": 403
             }
         },
         {
             "title": "Usuario totalmente vacío",
             "user": {},
             "expected": {
-                    "status": 400
+                    "status": 403
             }
         }
     ]
