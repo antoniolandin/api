@@ -23,7 +23,7 @@ register = async (req, res) => {
         res.status(201).json(data)
     }
     catch (error) {
-        handleError(res, req, title="Error al registrar usuario:", error, 400)
+        handleError(res, error, 400)
     } 
 }
 

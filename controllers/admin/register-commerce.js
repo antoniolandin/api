@@ -4,7 +4,7 @@ const { tokenSign } = require('../../utils/handleJwt')
 const log = require('../../utils/handleConsoleLog')
 
 // Función para registrar un comercio en la base de datos
-registerCommerce = async (req, res) => {
+const registerCommerce = async (req, res) => {
     try {
         // Creamos al comercio en la base de datos
         const commerceData = await commerce.create(req.body)
@@ -20,7 +20,7 @@ registerCommerce = async (req, res) => {
     }
     catch (error) {
         // Enviamos al cliente un mensaje de error
-        handleError(res, req, title="Error al registrar comercio:", error, 400)
+        handleError(res, error, 400)
     } 
 }
 

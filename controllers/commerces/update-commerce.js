@@ -54,7 +54,7 @@ updateCommerce = async (req, res) => {
         }
     }
     catch(error){
-        handleError(res, req, title="Error al actualizar comercio:", error, 400)
+        handleError(res, error, 400)
     }
 }
 

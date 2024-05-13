@@ -6,7 +6,7 @@ const handleHttpError = (res, message, code) => {
     res.status(code).json({ message })
 }
 
-const handleError = (res, req, title, error, code) => {
+const handleError = (res, error, code) => {
         // Los errores de validación de Sequelize vienen en un objeto error.errors (lista de errores)
         if (error.errors) {
             // Extraemos todos los errores del objeto error
