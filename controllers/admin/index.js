@@ -1,8 +1,10 @@
 // Exportar los componentes
 const login = require('./login')
-const register_commerce = require('./register-commerce')
+const registerCommerce = require('./register-commerce')
+const updateCommerce = require('./update-commerce')
 
 module.exports = {
     login,
-    register_commerce
+    registerCommerce,
+    updateCommerce
 }

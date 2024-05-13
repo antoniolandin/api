@@ -1,5 +1,5 @@
 const { admin } = require('../../models')
-const { handleHttpError } = require('../../utils/handleError')
+const { handleError, handleHttpError } = require('../../utils/handleError')
 const { encryptPassword, comparePassword } = require('../../utils/handlePassword')
 const { tokenSign } = require('../../utils/handleJwt')
 const colors = require('colors')

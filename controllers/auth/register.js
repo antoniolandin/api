@@ -1,5 +1,5 @@
 const { user } = require('../../models')
-const { handleHttpError } = require('../../utils/handleError')
+const { handleError } = require('../../utils/handleError')
 const { tokenSign } = require('../../utils/handleJwt')
 const colors = require('colors')
 const log = require('../../utils/handleConsoleLog')
@@ -30,29 +30,7 @@ register = async (req, res) => {
         res.status(201).json(data)
     }
     catch (error) {
-
-        // Los errores de validación de Sequelize vienen en un objeto error.errors (lista de errores)
-        if (error.errors) {
-            // Extraemos todos los errores del objeto error
-            errores = error.errors.map(e => e.message)
-
-            // Juntamos todos los errores en un solo string
-            mensaje_error = errores.join('\n')
-        }
-        else {
-            // Si no hay errores de validación, mostramos el mensaje de error normal
-            mensaje_error = error.message
-        }
-        
-        // Mostramos en consola que ha ocurrido un error al registrar el usuario
-        log(
-            "Error al registrar usuario:".bgRed,
-            JSON.stringify(req.body, null, 2).brightYellow,
-            mensaje_error.brightRed
-        )
-               
-        // Enviamos al cliente un mensaje de error
-        handleHttpError(res, mensaje_error, 400)
+        handleError(res, req, title="Error al registrar usuario:", error, 400)
     } 
 }
 

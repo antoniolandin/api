@@ -1,10 +1,10 @@
 const { commerce } = require('../../models')
-const { handleHttpError } = require('../../utils/handleError')
+const { handleError } = require('../../utils/handleError')
 const { tokenSign } = require('../../utils/handleJwt')
 const log = require('../../utils/handleConsoleLog')
 
 // Función para registrar un comercio en la base de datos
-register_commerce = async (req, res) => {
+registerCommerce = async (req, res) => {
     try {
         // Creamos al comercio en la base de datos
         const commerceData = await commerce.create(req.body)
@@ -26,29 +26,9 @@ register_commerce = async (req, res) => {
         res.status(201).json(data)
     }
     catch (error) {
-        // Los errores de validación de Sequelize vienen en un objeto error.errors (lista de errores)
-        if (error.errors) {
-            // Extraemos todos los errores del objeto error
-            errores = error.errors.map(e => e.message)
-
-            // Juntamos todos los errores en un solo string
-            mensaje_error = errores.join('\n')
-        }
-        else {
-            // Si no hay errores de validación, mostramos el mensaje de error normal
-            mensaje_error = error.message
-        }
-        
-        // Mostramos en consola que ha ocurrido un error al registrar el comercio
-        log(
-            "Error al registrar comercio:".bgRed,
-            JSON.stringify(req.body, null, 2).brightYellow,
-            mensaje_error.brightRed
-        )
-               
         // Enviamos al cliente un mensaje de error
-        handleHttpError(res, mensaje_error, 400)
+        handleError(res, req, title="Error al registrar comercio:", error, 400)
     } 
 }
 
-module.exports = register_commerce
+module.exports = registerCommerce
