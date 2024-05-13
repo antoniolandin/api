@@ -19,13 +19,6 @@ register = async (req, res) => {
             user: userData
         }
         
-        // Mostramos en consola que el usuario ha sido registrado correctamente
-        log(
-            "Registro exitoso de usuario:".bgGreen,
-            JSON.stringify(req.body, null, 2).brightYellow,
-            "Usuario ".green + userData.email.brightBlue + " registrado correctamente".green
-        )
-
         // Enviamos al cliente el token y los datos del usuario
         res.status(201).json(data)
     }

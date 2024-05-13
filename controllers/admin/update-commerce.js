@@ -19,14 +19,7 @@ updateCommerce = async (req, res) => {
             msg: "Comercio actualizado correctamente"
         }
         
-        // Log de la actualización del comercio
-        log(
-            "El comercio ha sido correctamente actualizado:".bgGreen,
-            JSON.stringify(req.body, null, 2).brightYellow,
-            "Usuario ".green + CIF.brightBlue + " actualizado correctamente".green
-        )
-
-        // Enviamos al cliente el token y los datos del usuario
+        // Enviamos al cliente la respuesta
         res.status(200).json(data) 
         
     }

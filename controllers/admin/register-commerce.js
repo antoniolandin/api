@@ -15,13 +15,6 @@ registerCommerce = async (req, res) => {
             commerce: commerceData
         }
         
-        // Mostramos en consola que el comercio ha sido registrado correctamente
-        log(
-            "Registro exitoso de comercio:".bgGreen,
-            JSON.stringify(req.body, null, 2).brightYellow,
-            "Usuario ".green + commerceData.email.brightBlue + " registrado correctamente".green
-        )
-
         // Enviamos al cliente el token y los datos del comercio
         res.status(201).json(data)
     }

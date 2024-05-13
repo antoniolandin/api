@@ -20,12 +20,12 @@ const handleError = (res, req, title, error, code) => {
             mensaje_error = error.message
         }
         
-        // Mostramos en consola que ha ocurrido un error al registrar el comercio
-        log(
-            title.bgRed,
-            JSON.stringify(req.body, null, 2).brightYellow,
-            mensaje_error.brightRed
-        )
+        // // Mostramos en consola que ha ocurrido un error al registrar el comercio
+        // log(
+        //     title.bgRed,
+        //     JSON.stringify(req.body, null, 2).brightYellow,
+        //     mensaje_error.brightRed
+        // )
                
         // Enviamos al cliente un mensaje de error
         handleHttpError(res, mensaje_error, code)
