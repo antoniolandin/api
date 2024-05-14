@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   webpage.init({
     city: DataTypes.STRING,
     activity: DataTypes.STRING,
+    title: DataTypes.STRING,
     summary: DataTypes.STRING,
     scoring: {
         type: DataTypes.FLOAT,
@@ -29,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'webpage',
   });
-
 
     webpage.associate = function(models) {
        webpage.belongsTo(models.commerce)

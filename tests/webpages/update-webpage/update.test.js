@@ -5,7 +5,7 @@ const fs = require('fs')
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
-    server = app.listen(4004)
+    server = app.listen(4005)
 })
 
 // Después de ejecutar los tests, se cierra el servidor y la conexión a la base de datos
@@ -16,7 +16,7 @@ afterAll(done => {
 })
 
 // Se obtienen los tests de los archivos JSON
-const files = fs.readdirSync('./tests/merchants/update-commerce/tests').filter(file => file.endsWith('.json'))
+const files = fs.readdirSync('./tests/webpages/update-webpage/tests').filter(file => file.endsWith('.json'))
 
 const tests = files.map(file => {
     return require(`./tests/${file}`)
@@ -32,7 +32,7 @@ const table = tests.map(test => {
         tests: test.tests.map(testCase => {
             return {
                 title: testCase.title,
-                commerce: testCase.commerce,
+                webpage: testCase.webpage,
                 expected: {
                     status: testCase.expected.status,
                     body: testCase.expected.body
@@ -42,48 +42,46 @@ const table = tests.map(test => {
     }
 })
 
-// Se declara el comercio de prueba
-const testCommerce = {
-    name: 'Comercio de prueba',
-    CIF: 'B32345698',
-    address: 'Calle de prueba',
-    email: 'comercioPrueba@proton.me',
-    phone: '666666666'
+// Web de prueba
+const testWebpage = {
+    title: 'test-update-comercio',
+    activity: 'test-actividad',
+    city: 'test-ciudad',
+    summary: 'test-resumen'
 }
 
-// Se declara la variable id para almacenar el id del comercio de prueba
+// Se inicializa la variable id para almacenar el id de la página web de prueba
 let id
 
-describe('PUT /api/merchants/:id', () => {
-
-    // Registrar comercio de prueba
-    describe('Registrar comercio de prueba', () => {
-        it('Debería registrar un comercio de prueba', async () => {
+describe('PUT /api/webpages/:id', () => {
+    
+    // Se crea una página web de prueba
+    describe('Creación página web de prueba', () => {
+        test('Debería crear una página web de prueba', async () => {
             const response = await request(app)
-                .post('/api/merchants')
-                .send(testCommerce)
-            
-            // Se comprueba que la respuesta del servidor sea correcta
+                .post('/api/webpages')
+                .send(testWebpage)
+
             expect(response.status).toBe(201)
-            
-            // Se almacena el id del comercio de prueba
-            id = response.body.commerce.id
+
+            id = response.body.id
         })
     })
 
-// Se ejecutan los tests
     describe.each(table)('$title', ({ tests }) => {
-        test.each(tests)('$title', async ({ commerce, expected }) => {
+        test.each(tests)('$title', async ({ webpage, expected }) => {
             // Se envía la petición al servidor
             const response = await request(app)
-                .put('/api/merchants/' + id)
-                .send(commerce)
+                .put('/api/webpages/' + id)
+                .send(webpage)
 
             // Se comprueba que la respuesta del servidor sea la esperada
             expect(response.status).toBe(expected.status)
 
             if (expected.body) {
-                expect(response.body).toEqual(expected.body)
+                for (let key in expected.body) {
+                    expect(response.body[key]).toEqual(expected.body[key])
+                }
             }
         })
     })

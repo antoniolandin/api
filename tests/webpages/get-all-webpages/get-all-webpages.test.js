@@ -5,7 +5,7 @@ const fs = require('fs')
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
-    server = app.listen(4007)
+    server = app.listen(4023)
 })
 
 // Después de ejecutar los tests, se cierra el servidor y la conexión a la base de datos
@@ -15,30 +15,28 @@ afterAll(done => {
     done()
 })
 
-// Definimos un comercio de prueba
-const testCommerce = {
-    name: 'Comercio de prueba',
-    CIF: 'Z32345698',
-    address: 'Calle de prueba',
-    email: 'comercioPrueba@proton.me',
-    phone: '666666666'
+// Definimos una web de prueba
+const testWebpage = {
+    title: 'test-webpage-get-all-commerces',
+    city: 'Pontevedra',
+    scoring: 3
 }
 
 describe('GET /api/webpages', () => {
 
-    // Registrar comercio de prueba
-    describe('Registrar comercio de prueba', () => {
-        it('Debería registrar un comercio de prueba', async () => {
+    // Registrar web de prueba
+    describe('Registrar una web de prueba', () => {
+        it('Debería registrar un web de prueba', async () => {
             const response = await request(app)
-                .post('/api/merchants')
-                .send(testCommerce)
+                .post('/api/webpages')
+                .send(testWebpage)
 
             expect(response.status).toBe(201)
         })
     })
 
-    describe('Mostrar todos los comercios', () => {
-        it('Debería mostrar todos los comercios', async () => {
+    describe('Mostrar todas las webs', () => {
+        it('Debería mostrar todas las webs', async () => {
             const response = await request(app)
                 .get('/api/webpages')
 

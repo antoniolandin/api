@@ -21,7 +21,7 @@
                 "CIF": "K12345678",
                 "address": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
                 "email": "loremipsumdolorsitametconsecteturadipsicinge@proton.me",
-                "phone": "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789",
+                "phone": "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789"
             },
             "expected": {
                 "status": 403
@@ -34,7 +34,7 @@
                 "CIF": "K1234567",
                 "address": "l",
                 "email": "l@p.m",
-                "phone": "12",
+                "phone": "12"
             },
             "expected": {
                 "status": 403

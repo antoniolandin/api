@@ -1,11 +1,15 @@
-const updateCommerce = require('./update-commerce')
-const deleteCommerce = require('./delete-commerce')
-const getAllCommerces = require('./get-all-commerces')
-const getCommercesCity = require('./get-commerces-city')
+const updateWebpage = require('./update-webpage')
+const deleteWebpage = require('./delete-webpage')
+const getAllWebpages = require('./get-all-webpages')
+const getWebpagesCity = require('./get-webpages-city')
+const createWebpage = require('./create-webpage')
+const getWebpage = require('./get-webpage')
 
 module.exports = {
-    updateCommerce,
-    deleteCommerce,
-    getAllCommerces,
-    getCommercesCity
+    updateWebpage,
+    deleteWebpage,
+    getAllWebpages,
+    getWebpagesCity,
+    createWebpage,
+    getWebpage
 }

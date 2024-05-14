@@ -2,9 +2,9 @@
     "title": "Actualizaciones correctas",
     "tests": [
         {
-            "title": "Actualizar nombre",
+            "title": "Actualizar título",
             "commerce": {
-                "name": "Esto no estaba así"
+                "title": "Nuevo título"
             },
             "expected": {
                 "status": 200

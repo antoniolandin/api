@@ -1,16 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const {
-    updateCommerce,
-    deleteCommerce,
-    getAllCommerces,
-    getCommercesCity
+    updateWebpage,
+    deleteWebpage,
+    getAllWebpages,
+    getWebpagesCity,
+    createWebpage,
+    getWebpage 
 } = require('../controllers/webpages')
-const { updateCommerceValidator } = require('../validators')
 
-router.put('/:CIF', updateCommerce)
-router.delete('/:CIF', deleteCommerce)
-router.get('/', getAllCommerces)
-router.get('/search/:city', getCommercesCity)
+router.post('/', createWebpage)
+router.put('/:id', updateWebpage)
+router.delete('/:id', deleteWebpage)
+router.get('/', getAllWebpages)
+router.get('/search/:city', getWebpagesCity)
+router.get('/:id', getWebpage)
 
 module.exports = router

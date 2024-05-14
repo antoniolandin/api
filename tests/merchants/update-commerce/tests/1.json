@@ -2,9 +2,9 @@
     "title": "Actualizaciones correctas",
     "tests": [
         {
-            "title": "Actualizar nombre",
+            "title": "Actualizar nombre del comercio",
             "commerce": {
-                "name": "Comercio de prueba",
+                "name": "Nombre actualizado",
                 "CIF": "B32345698",
                 "address": "Calle de prueba",
                 "email": "comercioPrueba@proton.me",

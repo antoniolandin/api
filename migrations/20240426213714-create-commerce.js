@@ -47,7 +47,6 @@ module.exports = {
             },
             commerceId: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
                 references: {
                     model: 'commerces',
                     key: 'id'
@@ -57,6 +56,9 @@ module.exports = {
                 type: Sequelize.STRING
             },
             activity: {
+                type: Sequelize.STRING
+            },
+            title: {
                 type: Sequelize.STRING
             },
             summary: {

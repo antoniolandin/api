@@ -1,4 +1,4 @@
-const { commerce } = require('../../models')
+const { webpage } = require('../../models')
 const { handleHttpError } = require('../../utils/handleError')
 
 const getCommercesCity = async (req, res) => {
@@ -9,21 +9,21 @@ const getCommercesCity = async (req, res) => {
         if (asc === 'true' || asc === 'false') {
             const ascBool = asc === 'true'
 
-            const commercesCity = await commerce.findAll({
+            const webpagesCity = await webpage.findAll({
                 where: { city: city },
                 order: [
                     ['scoring', ascBool ? 'ASC' : 'DESC']
                 ]
             })
 
-            res.status(200).json(commercesCity)
+            res.status(200).json(webpagesCity)
         }
         else {
-            const commercesCity = await commerce.findAll({
+            const webpagesCity = await webpage.findAll({
                 where: { city: city }
             })
 
-            res.status(200).json(commercesCity)
+            res.status(200).json(webpagesCity)
         }
 
     } catch (error) {

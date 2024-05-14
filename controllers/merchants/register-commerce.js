@@ -1,7 +1,6 @@
-const { commerce, webpage } = require('../../models')
+const { commerce } = require('../../models')
 const { handleError } = require('../../utils/handleError')
 const { tokenSign } = require('../../utils/handleJwt')
-const log = require('../../utils/handleConsoleLog')
 
 // Función para registrar un comercio en la base de datos
 const registerCommerce = async (req, res) => {
@@ -24,7 +23,6 @@ const registerCommerce = async (req, res) => {
     catch (error) {
         // Enviamos al cliente un mensaje de error
         handleError(res, error, 400)
-        console.log(error)
     } 
 }
 

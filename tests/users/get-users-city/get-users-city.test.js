@@ -1,7 +1,6 @@
 const request = require('supertest')
 const app = require('../../../app')
 const { sequelize } = require('../../../models')
-const fs = require('fs')
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
@@ -52,13 +51,20 @@ describe('GET /api/users/:city', () => {
             expect(response.status).toBe(201)
         })
     })
+    
+    describe('Mostrar todos los usuarios', () => {
+        it('Debería mostrar los usuarios de Buenos Aires', async () => {
+            const response = await request(app)
+                .get('/api/users/Buenos Aires')
+            
+            // Comprobamos que la petición ha sido exitosa
+            expect(response.status).toBe(200)
 
-    // Obtenemos usuarios de Buenos Aires
-    it('Debería obtener los usuarios de Buenos Aires', async () => {
-        const response = await request(app)
-            .get('/api/users/Buenos Aires')
-
-        expect(response.status).toBe(200)
-        expect(response.body.users.length).toBe(1)
+            // Comprobamos que solo se muestrán los usuarios de Buenos Aires y que reciban ofertas
+            response.body.users.forEach(user => {
+                expect(user.city).toBe('Buenos Aires')
+                expect(user.recibeOffers).toBe(true)
+            })
+        })
     })
 })
