@@ -8,10 +8,10 @@ const {
     getCommerce,
     deleteCommerce
 } = require('../controllers/merchants');
-const { registerCommerceValidator } = require('../validators');
+const { registerCommerceValidator, updateCommerceValidator } = require('../validators');
 
 router.post('/', registerCommerceValidator, registerCommerce);
-router.put('/:id', registerCommerceValidator, updateCommerce);
+router.put('/:id', updateCommerceValidator, updateCommerce);
 router.get('/', getAllCommerces);
 router.get('/:id', getCommerce);
 router.delete('/:id', deleteCommerce);
