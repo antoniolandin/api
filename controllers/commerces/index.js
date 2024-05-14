@@ -1,5 +1,7 @@
-const update = require('./update-commerce')
+const updateCommerce = require('./update-commerce')
+const deleteCommerce = require('./delete-commerce')
 
 module.exports = {
-    update
+    updateCommerce,
+    deleteCommerce
 }

@@ -1,4 +1,4 @@
-const { commerce } = require('../../../models')
+const { commerce } = require('../../models')
 const { handleHttpError } = require('../../utils/handleError')
 const { tokenSign } = require('../../utils/handleJwt')
 const log = require('../../utils/handleConsoleLog')
@@ -7,16 +7,12 @@ const log = require('../../utils/handleConsoleLog')
 delete_commerce = async (req, res) => {
 
     try {
-        const { CIF } = req.body
+        const CIF = req.params.CIF
 
         // Se comprueba que el CIF sea válido
         if (!CIF) {
             handleHttpError(res, 'El CIF es requerido', code=400)
-            log(
-                'Error al eliminar comercio: '.bgRed,
-                JSON.stringify(req.body, null, 2).brightYellow,
-                'El CIF es requerido'.brightRed
-            )
+            return
         }
 
         // Se comprueba que el comercio exista
@@ -24,11 +20,7 @@ delete_commerce = async (req, res) => {
 
         if (!commerceExists) {
             handleHttpError(res, 'El comercio no existe', code=404)
-            log(
-                'Error al eliminar comercio: '.bgRed,
-                JSON.stringify(req.body, null, 2).brightYellow,
-                'El comercio no existe'.brightRed
-            )
+            return
         }
 
         // Se elimina el comercio
@@ -38,11 +30,6 @@ delete_commerce = async (req, res) => {
     }
     catch (error) {
         handleHttpError(res, error.message, code=400)
-        log(
-            'Error al eliminar comercio: '.bgRed,
-            JSON.stringify(req.body, null, 2).brightYellow,
-            error.message.brightRed
-        )
     }
 }
 

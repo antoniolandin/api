@@ -1,0 +1,14 @@
+{
+    "title": "Actualizaciones correctas",
+    "tests": [
+        {
+            "title": "Actualizar nombre",
+            "commerce": {
+                "name": "Esto no estaba así"
+            },
+            "expected": {
+                "status": 200
+            }
+        }
+    ]
+}
