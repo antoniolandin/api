@@ -5,7 +5,7 @@ const fs = require('fs')
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
 beforeAll(() => {
-    server = app.listen(4005)
+    server = app.listen(4004)
 })
 
 // Después de ejecutar los tests, se cierra el servidor y la conexión a la base de datos
@@ -16,7 +16,7 @@ afterAll(done => {
 })
 
 // Se obtienen los tests de los archivos JSON
-const files = fs.readdirSync('./tests/commerce/update/tests').filter(file => file.endsWith('.json'))
+const files = fs.readdirSync('./tests/merchants/update-commerce/tests').filter(file => file.endsWith('.json'))
 
 const tests = files.map(file => {
     return require(`./tests/${file}`)
@@ -44,19 +44,19 @@ const table = tests.map(test => {
 
 const testCommerce = {
     name: 'Comercio de prueba',
-    CIF: 'C32345698',
+    CIF: 'B32345698',
     address: 'Calle de prueba',
     email: 'comercioPrueba@proton.me',
     phone: '666666666'
 }
 
-describe('PUT /api/commerces/:CIF', () => {
+describe('PUT /api/merchants/:CIF', () => {
 
     // Registrar comercio de prueba
     describe('Registrar comercio de prueba', () => {
         it('Debería registrar un comercio de prueba', async () => {
             const response = await request(app)
-                .post('/api/admin/merchants')
+                .post('/api/merchants')
                 .send(testCommerce)
 
             expect(response.status).toBe(201)
@@ -68,9 +68,9 @@ describe('PUT /api/commerces/:CIF', () => {
         test.each(tests)('$title', async ({ commerce, expected }) => {
             // Se envía la petición al servidor
             const response = await request(app)
-                .put('/api/commerces/' + testCommerce.CIF)
+                .put('/api/merchants/' + testCommerce.CIF)
                 .send(commerce)
-            
+
             // Se comprueba que la respuesta del servidor sea la esperada
             expect(response.status).toBe(expected.status)
 

@@ -39,13 +39,13 @@ const testCommerces = [
 
 const ciudad = testCommerces[0].city
 
-describe('GET /api/users/webpages', () => {
+describe('GET /api/webpages/search/:city', () => {
 
     // Registrar comercio de prueba
     describe('Registrar comercio de prueba', () => {
         it('Debería registrar un comercio de prueba', async () => {
             const response = await request(app)
-                .post('/api/admin/merchants')
+                .post('/api/merchants')
                 .send(testCommerces[0])
 
             // Comprobamos que la respuesta es correcta
@@ -53,7 +53,7 @@ describe('GET /api/users/webpages', () => {
         }),
         it('Debería registrar otro comercio de prueba', async () => {
             const response = await request(app)
-                .post('/api/admin/merchants')
+                .post('/api/merchants')
                 .send(testCommerces[1])
 
             // Comprobamos que la respuesta es correcta
@@ -64,10 +64,8 @@ describe('GET /api/users/webpages', () => {
     describe('Mostrar todos los comercios', () => {
         it('Debería mostrar los comercios de ' + ciudad + ' ordenados por score de forma ascendente', async () => {
             const response = await request(app)
-                .get('/api/users/webpages/' + ciudad + '?asc=true')
+                .get('/api/webpages/search/' + ciudad + '?asc=true')
             
-            console.log(response.body)
-
             // Comprobamos que la respuesta es correcta
             expect(response.status).toBe(200)
 
