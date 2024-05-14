@@ -1,4 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { getUsersCity } = require('../controllers/users')
 
-module.exports = router;
+router.get('/:city', getUsersCity)
+
+module.exports = router

@@ -22,9 +22,6 @@
                 "address": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
                 "email": "loremipsumdolorsitametconsecteturadipsicinge@proton.me",
                 "phone": "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789",
-                "city": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
-                "activity": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
-                "summary": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed"
             },
             "expected": {
                 "status": 403
@@ -38,9 +35,6 @@
                 "address": "l",
                 "email": "l@p.m",
                 "phone": "12",
-                "city": "l",
-                "activity": "l",
-                "summary": "l"
             },
             "expected": {
                 "status": 403

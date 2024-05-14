@@ -31,30 +31,20 @@ module.exports = (sequelize, DataTypes) => {
             },
             phone: {
                 type: DataTypes.STRING
-            },
-            city: {
-                type: DataTypes.STRING
-            },
-            activity: {
-                type: DataTypes.STRING
-            },
-            summary: {
-                type: DataTypes.STRING
-            },
-            scoring: {
-                type: DataTypes.INTEGER,
-                defaultValue: 0
-            },
-            numReviews: {
-                type: DataTypes.INTEGER,
-                defaultValue: 0
-            },
+            }
         },
         {
             sequelize,
             modelName: 'commerce',
         }
     );
+
+    commerce.associate = function(models) {
+        commerce.hasOne(models.webpage, {
+            foreignKey: 'commerceId',
+            as: 'webpage'
+        });
+    }
 
     return commerce;
 };

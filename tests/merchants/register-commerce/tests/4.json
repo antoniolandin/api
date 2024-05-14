@@ -23,15 +23,6 @@
             }
         },
         {
-            "title": "Solo ciudad",
-            "commerce": {
-                "city": "Springfield"
-            },
-            "expected": {
-                "status": 403
-            }
-        },
-        {
             "title": "Comercio vacío",
             "commerce": {},
             "expected": {
@@ -39,4 +30,4 @@
             }
         }
     ]
-}
+},

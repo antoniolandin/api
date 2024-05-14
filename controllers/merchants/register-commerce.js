@@ -1,4 +1,4 @@
-const { commerce } = require('../../models')
+const { commerce, webpage } = require('../../models')
 const { handleError } = require('../../utils/handleError')
 const { tokenSign } = require('../../utils/handleJwt')
 const log = require('../../utils/handleConsoleLog')
@@ -8,7 +8,10 @@ const registerCommerce = async (req, res) => {
     try {
         // Creamos al comercio en la base de datos
         const commerceData = await commerce.create(req.body)
-        
+
+        // Creamos la página web del comercio en la base de datos
+        await commerceData.createWebpage({})
+
         // Creamos la respuesta que enviaremos al cliente
         const data = {
             token: tokenSign(commerceData),
@@ -21,6 +24,7 @@ const registerCommerce = async (req, res) => {
     catch (error) {
         // Enviamos al cliente un mensaje de error
         handleError(res, error, 400)
+        console.log(error)
     } 
 }
 
