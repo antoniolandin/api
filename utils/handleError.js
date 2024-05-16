@@ -1,8 +1,10 @@
 const log = require('./handleConsoleLog')
+const loggerStream = require('./handleLogger')
 require('colors')
 
 // Función para manejar los errores de la aplicación
 const handleHttpError = (res, message, code) => {
+    // Enviamos al cliente un mensaje de error
     res.status(code).json({ message })
 }
 

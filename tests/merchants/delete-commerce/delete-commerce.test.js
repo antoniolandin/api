@@ -47,8 +47,6 @@ describe('DELETE /api/merchants/:id', () => {
             const response = await request(app)
                 .delete(`/api/merchants/${id}`)
 
-            console.log(response.body)
-                
             // Buscar el comercio eliminado por su id
             const commerceId = await request(app)
                 .get('/api/merchants/id')

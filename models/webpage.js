@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+       webpage.belongsTo(models.commerce)
+       webpage.hasMany(models.review)
     }
   }
   webpage.init({
@@ -31,8 +32,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'webpage',
   });
 
-    webpage.associate = function(models) {
-       webpage.belongsTo(models.commerce)
-    }
   return webpage;
 };

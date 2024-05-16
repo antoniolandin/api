@@ -10,7 +10,7 @@ updateUser = async (req, res) => {
         // Obtenemos los datos del usuario a actualizar
         const userData = req.body 
 
-        // Buscamos la web en la base de datos
+        // Buscamos el usuario en la base de datos
         const oldUser = await user.findOne({where: {id: id}})
         
         // Si el usuario no existe, devolvemos un error
@@ -31,8 +31,6 @@ updateUser = async (req, res) => {
                     return
                 }
             }
-
-            console.log(userData)
 
             // Actualizamos el usuario en la base de datos
             await oldUser.update(userData)

@@ -65,7 +65,7 @@ module.exports = {
                 type: Sequelize.STRING
             },
             scoring: {
-                type: Sequelize.INTEGER
+                type: Sequelize.FLOAT
             },
             numReviews: {
                 type: Sequelize.INTEGER
@@ -78,9 +78,39 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             }
+        }).then(() => queryInterface.createTable('reviews', {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER
+            },
+            webpageId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'webpages',
+                    key: 'id'
+                }
+            },
+            text: {
+                type: Sequelize.STRING
+            },
+            rating: {
+                type: Sequelize.INTEGER
+            },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            }
+
         }))
-    },
+    )},
     async down(queryInterface, Sequelize) {
+        await queryInterface.dropTable('reviews');
         await queryInterface.dropTable('webpages');
         await queryInterface.dropTable('commerces');
     }

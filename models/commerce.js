@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         * The `models/index` file will call this method automatically.
         */
         static associate(models) {
-        // define association here
+            commerce.hasOne(models.webpage, {
+                foreignKey: 'commerceId',
+                as: 'webpage'
+            });
         }
     }
     commerce.init(
@@ -38,13 +41,6 @@ module.exports = (sequelize, DataTypes) => {
             modelName: 'commerce',
         }
     );
-
-    commerce.associate = function(models) {
-        commerce.hasOne(models.webpage, {
-            foreignKey: 'commerceId',
-            as: 'webpage'
-        });
-    }
 
     return commerce;
 };
