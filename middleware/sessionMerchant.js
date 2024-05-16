@@ -1,8 +1,8 @@
 const { handleHttpError } = require('../utils/handleError');
 const { tokenVerify } = require('../utils/handleJwt');
-const { user } = require('../models');
+const { commerce } = require('../models');
 
-const authMiddleware = async (req, res, next) => {
+const authMiddlewareMerchant = async (req, res, next) => {
     try {
         if (!req.headers.authorization) {
             return handleHttpError(res, 'NOT_TOKEN', 401)
@@ -18,19 +18,19 @@ const authMiddleware = async (req, res, next) => {
         }
 
         // Buscamos al usuario en la base de datos
-        const userData = await user.findByPk(dataToken.id);
+        const commerceData = await commerce.findByPk(dataToken.id);
         
         // Si no existe el usuario
-        if (!userData) {
-            return handleHttpError(res, 'USER_NOT_FOUND', 404)
+        if (!commerceData) {
+            return handleHttpError(res, 'MERCHANT_NOT_FOUND', 404)
             return
         }
 
         // Eliminamos la contraseña del objeto del usuario (motivos de seguridad)
-        userData.set('password', undefined, { strict: false })
         
         // Guardamos el usuario en la petición
-        req.user = userData;
+        req.commerce = commerceData;
+        req.webpageId = dataToken.webpageId;
 
         next()
     }
@@ -39,4 +39,4 @@ const authMiddleware = async (req, res, next) => {
     }
 }
 
-module.exports = authMiddleware;
+module.exports = authMiddlewareMerchant;

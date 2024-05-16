@@ -9,6 +9,21 @@ updateUser = async (req, res) => {
         
         // Obtenemos los datos del usuario a actualizar
         const userData = req.body 
+        
+        // Obtenemos el usuario autenticado
+        const userJwt = req.user
+
+        // Comprobamos si el usuario autenticado está autenticado
+        if (!userJwt) {
+            handleHttpError(res, 'No estás autenticado', 401)
+            return
+        }
+
+        // Comprobamos si el usuario autenticado es el mismo que el que se quiere eliminar
+        if (userJwt.id != id){
+            handleHttpError(res, 'No tienes permisos para eliminar este usuario', 403)
+            return
+        }
 
         // Buscamos el usuario en la base de datos
         const oldUser = await user.findOne({where: {id: id}})

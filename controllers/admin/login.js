@@ -1,23 +1,21 @@
-const { admin } = require('../../models')
-const { handleError, handleHttpError } = require('../../utils/handleError')
-const { encryptPassword, comparePassword } = require('../../utils/handlePassword')
+const { user } = require('../../models')
+const { handleHttpError } = require('../../utils/handleError')
+const { comparePassword } = require('../../utils/handlePassword')
 const { tokenSign } = require('../../utils/handleJwt')
-const colors = require('colors')
-const log = require('../../utils/handleConsoleLog')
 
 // Función para iniciar sesión (con email y contraseña)
 login = async (req, res) => {
     
     try {
-        // Buscamos al admin en la base de datos
-        const adminData = await admin.findOne({
+        // Buscamos al user en la base de datos
+        const userData = await user.findOne({
             where : {
                 email: req.body.email
             }
         })
 
-        // Verificamos si el admin existe
-        if (!adminData) {
+        // Verificamos si el user existe
+        if (!userData) {
 
             // Enviamos al cliente un mensaje de error
             handleHttpError(res, 'Admin no existe', 404)
@@ -25,7 +23,7 @@ login = async (req, res) => {
         }
 
         // Verificamos si la contraseña es correcta
-        const passwordMatch = await comparePassword(req.body.password, adminData.password)
+        const passwordMatch = await comparePassword(req.body.password, userData.password)
 
         if (!passwordMatch) {
             // Enviamos al cliente un mensaje de error
@@ -33,16 +31,16 @@ login = async (req, res) => {
             return
         }
 
-        // Eliminamos la contraseña del objeto del admin (motivos de seguridad)
-        adminData.set('password', undefined, { strict: false })
+        // Eliminamos la contraseña del objeto del user (motivos de seguridad)
+        userData.set('password', undefined, { strict: false })
 
         // Creamos la respuesta que enviaremos al cliente
         const data = {
-            token: tokenSign(adminData),
-            admin: adminData
+            token: tokenSign(userData),
+            user: userData
         }
 
-        // Enviamos al cliente el token y los datos del admin
+        // Enviamos al cliente el token y los datos del user
         res.status(200).json(data)
     }
     catch (error) {

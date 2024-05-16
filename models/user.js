@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
                 msg: 'El email ya está en uso'
             }
         },
+        role: {
+            type: DataTypes.STRING,
+            defaultValue: 'user'
+        },
         password: {
             type: DataTypes.STRING
         },

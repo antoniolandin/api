@@ -42,46 +42,82 @@ const table = tests.map(test => {
     }
 })
 
-// Web de prueba
-const testWebpage = {
-    title: 'test-update-comercio',
-    activity: 'test-actividad',
-    city: 'test-ciudad',
-    summary: 'test-resumen'
+// Se declara el comercio de prueba
+const testCommerce = {
+    name: 'update-webpage-commerce',
+    CIF: 'K32040698',
+    address: 'Calle de prueba',
+    email: 'comercioPrueba@proton.me',
+    phone: '666666666'
 }
+
+// Definimos a nuestro admin de prueba
+const testAdmin = {
+    "name": "update-webpage-admin",
+    "email": "update-webpage-admin@proton.me",
+    "password": "update-webpage-admin",
+}
+
+// Se declara la variable token para almacenar el token del admin de prueba
+let token
+
+// Se declara la variable token_commerce para almacenar el token del comercio de prueba
+let token_commerce
 
 // Se inicializa la variable id para almacenar el id de la página web de prueba
 let id
 
 describe('PUT /api/webpages/:id', () => {
-    
-    // Se crea una página web de prueba
-    describe('Creación página web de prueba', () => {
-        test('Debería crear una página web de prueba', async () => {
+
+    // Registrar un admin de pruebas
+    describe("Registrar un admin de pruebas", () => {
+        test("Debería registrar un admin de pruebas", async () => {
             const response = await request(app)
-                .post('/api/webpages')
-                .send(testWebpage)
+                .post('/api/admin/register')
+                .send(testAdmin)
 
             expect(response.status).toBe(201)
+            expect(response.body).toHaveProperty('token')
+            expect(response.body).toHaveProperty('user')
 
-            id = response.body.id
+            token = response.body.token
         })
     })
 
+    // Registrar comercio de prueba
+    describe('Registrar comercio de prueba', () => {
+        it('Debería registrar un comercio de prueba', async () => {
+            const response = await request(app)
+                .post('/api/merchants')
+                .set('Authorization', `Bearer ${token}`)
+                .send(testCommerce)
+            
+            // Se comprueba que la respuesta del servidor sea correcta
+            expect(response.status).toBe(201)
+            expect(response.body).toHaveProperty('token')
+            expect(response.body).toHaveProperty('commerce')
+            expect(response.body).toHaveProperty('webpage')
+
+            // Se almacena el id de la página web de prueba
+            id = response.body.webpage.id
+            token_commerce = response.body.token
+        })
+    })
+    
     describe.each(table)('$title', ({ tests }) => {
         test.each(tests)('$title', async ({ webpage, expected }) => {
             // Se envía la petición al servidor
             const response = await request(app)
                 .put('/api/webpages/' + id)
+                .set('Authorization', `Bearer ${token_commerce}`)
                 .send(webpage)
 
             // Se comprueba que la respuesta del servidor sea la esperada
             expect(response.status).toBe(expected.status)
-
-            if (expected.body) {
-                for (let key in expected.body) {
-                    expect(response.body[key]).toEqual(expected.body[key])
-                }
+            
+            // Se comprueba que el cuerpo de la respuesta sea el esperado
+            for (let key in webpage) {
+                expect(response.body[key]).toEqual(webpage[key])
             }
         })
     })

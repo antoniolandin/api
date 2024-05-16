@@ -54,13 +54,39 @@ const testCommerce = {
 // Se declara la variable id para almacenar el id del comercio de prueba
 let id
 
+// Definimos a nuestro admin de prueba
+const testAdmin = {
+    "name": "register-commerce-admin",
+    "email": "register-commercer-admin@proton.me",
+    "password": "register-commerce-admin",
+}
+
+// Se declara la variable token para almacenar el token del admin de prueba
+let token
+
 describe('PUT /api/merchants/:id', () => {
+    
+    // Registrar un admin de pruebas
+    describe("Registrar un admin de pruebas", () => {
+        test("Debería registrar un admin de pruebas", async () => {
+            const response = await request(app)
+                .post('/api/admin/register')
+                .send(testAdmin)
+
+            expect(response.status).toBe(201)
+            expect(response.body).toHaveProperty('token')
+            expect(response.body).toHaveProperty('user')
+
+            token = response.body.token
+        })
+    })
 
     // Registrar comercio de prueba
     describe('Registrar comercio de prueba', () => {
         it('Debería registrar un comercio de prueba', async () => {
             const response = await request(app)
                 .post('/api/merchants')
+                .set('Authorization', `Bearer ${token}`)
                 .send(testCommerce)
             
             // Se comprueba que la respuesta del servidor sea correcta
@@ -77,6 +103,7 @@ describe('PUT /api/merchants/:id', () => {
             // Se envía la petición al servidor
             const response = await request(app)
                 .put('/api/merchants/' + id)
+                .set('Authorization', `Bearer ${token}`)
                 .send(commerce)
 
             // Se comprueba que la respuesta del servidor sea la esperada

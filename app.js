@@ -3,6 +3,8 @@ const cors = require('cors')
 require('dotenv').config()
 const morganBody = require('morgan-body')
 const loggerStream = require('./utils/handleLogger')
+const swaggerUi = require('swagger-ui-express')
+const swaggerSpecs = require('./docs/swagger')
 
 // Creamos la aplicación express
 const app = express()
@@ -19,6 +21,13 @@ morganBody(app, {
 // Le decimos a la aplicación que user cors para evitar el error Corss-Domain (XD)
 app.use(cors())
 app.use(express.json())
+
+// Configuramos swagger
+app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpecs)
+)
 
 // Rutas
 app.use('/api', require('./routes'))

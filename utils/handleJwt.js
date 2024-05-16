@@ -16,6 +16,21 @@ const tokenSign = (user) => {
     return sign;
 }
 
+const tokenSignMerchant = (merchant) => {
+    const sign = jwt.sign(
+        {
+            id: merchant.id,
+            webpageId: merchant.webpageId,
+        },
+        JWT_SECRET,
+        {
+            expiresIn: '2h',
+        } 
+    )
+
+    return sign;
+}
+
 const tokenVerify = (token) => {
     try {
         return jwt.verify(token, JWT_SECRET);
@@ -26,6 +41,7 @@ const tokenVerify = (token) => {
 
 module.exports = {
     tokenSign,
+    tokenSignMerchant,
     tokenVerify,
 }
 

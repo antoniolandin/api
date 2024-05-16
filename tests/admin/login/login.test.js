@@ -1,6 +1,6 @@
 const request = require('supertest')
 const app = require('../../../app')
-const { sequelize, admin } = require('../../../models')
+const { sequelize, user } = require('../../../models')
 const fs = require('fs')
 
 // Cuando se ejecuta el test, se levanta el servidor en un puerto arbitrario para que no interfiera con el servidor en producción
@@ -19,7 +19,8 @@ afterAll(done => {
 const test_admin = {
     name: "testAdmin",
     email: "testAdmin@proton.me",
-    password: "12345678"
+    password: "12345678",
+    role: "admin"
 }
 
 // Se obtienen los tests de los archivos JSON
@@ -54,7 +55,7 @@ describe('POST /api/admin/login', () => {
     // Primero, registramos un usuario de prueba
     describe('Registrar al admin de prueba', () => {      
         it('Debería registrar un admin', async () => {
-            const res = await admin.create(test_admin)
+            const res = await user.create(test_admin)
             
             // Esperamos que el objeto devuelto tenga las propiedades esperadas
             expect(res).toHaveProperty('id')

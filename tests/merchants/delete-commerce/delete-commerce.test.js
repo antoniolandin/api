@@ -26,13 +26,39 @@ const testCommerce = {
 // Variable para almacenar el id del comercio de prueba, para poder eliminarlo por su id
 let id
 
+// Se crea un admin de pruebas
+const testAdmin = {
+    "name": "delete-commerce-admin",
+    "email": "delete-commerce-admin@proton.me",
+    "password": "delete-commerce-admin",
+}
+
+// Se crea una variable para guardar el token del admin
+let token
+
 describe('DELETE /api/merchants/:id', () => {
+
+    // Registrar un admin de pruebas
+    describe("Registrar un admin de pruebas", () => {
+        test("Debería registrar un admin de pruebas", async () => {
+            const response = await request(app)
+                .post('/api/admin/register')
+                .send(testAdmin)
+
+            expect(response.status).toBe(201)
+            expect(response.body).toHaveProperty('token')
+            expect(response.body).toHaveProperty('user')
+
+            token = response.body.token
+        })
+    })
 
     // Registrar web de prueba
     describe('Registrar un comercio de prueba', () => {
         it('Debería registrar un comercio de prueba', async () => {
             const response = await request(app)
                 .post('/api/merchants')
+                .set('Authorization', `Bearer ${token}`)
                 .send(testCommerce)
 
             expect(response.status).toBe(201)
@@ -46,10 +72,12 @@ describe('DELETE /api/merchants/:id', () => {
         it('Debería eliminar un comercio de prueba', async () => {
             const response = await request(app)
                 .delete(`/api/merchants/${id}`)
+                .set('Authorization', `Bearer ${token}`)
 
             // Buscar el comercio eliminado por su id
             const commerceId = await request(app)
                 .get('/api/merchants/id')
+                .set('Authorization', `Bearer ${token}`)
             
             // Comprobar que la respuesta es 200
             expect(response.status).toBe(200)

@@ -16,8 +16,8 @@ afterAll(done => {
 
 // Definimos un usuario de prueba
 const testUser = {
-    "name": "test-delete-user",
-    "email": "test-delete-user@proton.me",
+    "name": "delete-user",
+    "email": "delete-user@proton.me",
     "password": "123456",
     "city": "Buenos Aires",
     "recibeOffers": false
@@ -25,6 +25,9 @@ const testUser = {
 
 // Definimos una variable para almacenar el id del usuario de prueba, ya que lo necesitaremos para el test de eliminar un usuario por su id
 let id
+
+// Definimos una variable para almacenar el token del usuario de prueba, ya que lo necesitaremos para el test de eliminar un usuario por su id
+let token
 
 describe('DELETE /api/users/:id', () => {
 
@@ -37,7 +40,13 @@ describe('DELETE /api/users/:id', () => {
 
             expect(response.status).toBe(201)
 
+            // Verificamos que la respuesta contenga el usuario y el token
+            expect(response.body).toHaveProperty('user')
+            expect(response.body).toHaveProperty('token')
+            
+            // Guardamos el id y el token del usuario de prueba
             id = response.body.user.id
+            token = response.body.token
         })
     })
 
@@ -46,6 +55,7 @@ describe('DELETE /api/users/:id', () => {
         it('Debería eliminar un usuario', async () => {
             const response = await request(app)
                 .delete(`/api/users/${id}`)
+                .set('Authorization', `Bearer ${token}`)
 
             expect(response.status).toBe(200)
         })

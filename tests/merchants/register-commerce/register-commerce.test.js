@@ -42,13 +42,40 @@ const table = tests.map(test => {
     }
 })
 
+// Se crea un admin de pruebas
+const testAdmin = {
+    "name": "update-commerce-admin",
+    "email": "update-commerce-admin@proton.me",
+    "password": "update-commerce-admin",
+}
+
+// Se crea una variable para guardar el token del admin
+let token
+
 describe('POST /merchants', () => {
-// Se ejecutan los tests
+
+    // Registrar un admin de pruebas
+    describe("Registrar un admin de pruebas", () => {
+        test("Debería registrar un admin de pruebas", async () => {
+            const response = await request(app)
+                .post('/api/admin/register')
+                .send(testAdmin)
+
+            expect(response.status).toBe(201)
+            expect(response.body).toHaveProperty('token')
+            expect(response.body).toHaveProperty('user')
+
+            token = response.body.token
+        })
+    })
+    
+    // Se ejecutan los tests
     describe.each(table)('$title', ({ tests }) => {
         test.each(tests)('$title', async ({ commerce, expected }) => {
             // Se envía la petición al servidor
             const response = await request(app)
                 .post('/api/merchants')
+                .set('Authorization', `Bearer ${token}`)
                 .send(commerce)
 
             // Se comprueba que la respuesta del servidor sea la esperada

@@ -2,11 +2,11 @@ const { user } = require('../../models')
 const { handleError } = require('../../utils/handleError')
 const { tokenSign } = require('../../utils/handleJwt')
 
-// Función para registrar un usuario en la base de datos
+// Función para registrar un admin en la base de datos
 register = async (req, res) => {
     try {
-        // Descartamos el campo role en la petición
-        req.body.role = 'user'
+        // Ponemos el rol de admin en el usuario
+        req.body.role = 'admin'
 
         // Creamos al usuario en la base de datos
         const userData = await user.create(req.body)

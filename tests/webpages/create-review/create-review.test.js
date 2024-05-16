@@ -42,20 +42,51 @@ const table = tests.map(test => {
     }
 })
 
+// Definimos una página web de prueba
 const testWebpage = {
     title: "test-review-page",
     activity: "test-activity",
     city: "test-city",
 }
 
+// Definimos un usuario de prueba
+const testUser = {
+    "name": "test-delete-user",
+    "email": "test-delete-user@proton.me",
+    "password": "123456",
+    "city": "Buenos Aires",
+    "recibeOffers": false
+}
+
 // Se declara la variable id para almacenar el id de la página web de prueba
 let id
+
+// Se declara la variable token para almacenar el token del usuario de prueba
+let token
 
 // Variables para ir calculando el rating promedio
 let numReviews = 0
 let totalRating = 0
 
 describe('PATCH /api/webpages/:id', () => {
+
+    // Registramo un usuario de prueba
+    describe('Registramos un usuario de prueba', () => {
+        it('Debería registrar un usuario', async () => {
+            const response = await request(app)
+                .post('/api/auth/register')
+                .send(testUser)
+
+            expect(response.status).toBe(201)
+
+            // Verificamos que la respuesta contenga el usuario y el token
+            expect(response.body).toHaveProperty('user')
+            expect(response.body).toHaveProperty('token')
+            
+            // Guardamos el id y el token del usuario de prueba
+            token = response.body.token
+        })
+    })
 
     // Se crea una página web de prueba
     describe('Creación página web de prueba', () => {
@@ -76,6 +107,7 @@ describe('PATCH /api/webpages/:id', () => {
             // Se envía la petición al servidor
             const response = await request(app)
                 .patch('/api/webpages/' + id)
+                .set('Authorization', 'Bearer ' + token)
                 .send(review)
 
             // Se comprueba que la respuesta del servidor sea la esperada

@@ -52,6 +52,9 @@ const testUser = {
 // Se inicializa la variable id para almacenar el id del usuario de prueba
 let id
 
+// Se inicializa la variable token para almacenar el token del usuario de prueba
+let token
+
 describe('PUT /api/users/:id', () => {
     
     // Se crea una página web de prueba
@@ -63,9 +66,12 @@ describe('PUT /api/users/:id', () => {
             
             // Se comprueba que la respuesta del servidor sea la esperada
             expect(response.status).toBe(201)
+            expect(response.body).toHaveProperty('token')
+            expect(response.body).toHaveProperty('user')
             
             // Se almacena el id del usuario de prueba
             id = response.body.user.id
+            token = response.body.token
         })
     })
 
@@ -74,6 +80,7 @@ describe('PUT /api/users/:id', () => {
             // Se envía la petición al servidor
             const response = await request(app)
                 .put('/api/users/' + id)
+                .set('Authorization', 'Bearer ' + token)
                 .send(user)
 
             // Se comprueba que la respuesta del servidor sea la esperada

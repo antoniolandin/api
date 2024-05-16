@@ -1,6 +1,6 @@
 const { commerce } = require('../../models')
 const { handleError } = require('../../utils/handleError')
-const { tokenSign } = require('../../utils/handleJwt')
+const { tokenSignMerchant } = require('../../utils/handleJwt')
 
 // Función para registrar un comercio en la base de datos
 const registerCommerce = async (req, res) => {
@@ -11,10 +11,20 @@ const registerCommerce = async (req, res) => {
         // Creamos la página web del comercio en la base de datos
         await commerceData.createWebpage({})
 
+        // Obtenemos la página web del comercio
+        const webpage = await commerceData.getWebpage()
+        
+        // Creamos el token del comercio
+        const tokenData = {
+            id: commerceData.id,
+            webpageId: webpage.id,
+        }
+
         // Creamos la respuesta que enviaremos al cliente
         const data = {
-            token: tokenSign(commerceData),
-            commerce: commerceData
+            token: tokenSignMerchant(tokenData),
+            commerce: commerceData,
+            webpage: webpage,
         }
         
         // Enviamos al cliente el token y los datos del comercio

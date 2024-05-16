@@ -6,6 +6,26 @@ updateWebpage = async (req, res) => {
     try{
         // Obtenemos la id del comercio a modificar
         const id = req.params.id
+
+        if(!id){
+            handleHttpError(res, 'Falta la id del comercio', 400)
+            return
+        }
+
+        // Obtenemos la id de la página a modificar desde el jwt
+        const webpageId = req.webpageId
+        
+        // Si no se ha obtenido la id de la página, devolvemos un error
+        if(!webpageId){
+            handleHttpError(res, 'No tiene permisos para modificar esta página', 403)
+            return
+        }
+
+        // Si la id de la página no coincide con la id de la web a modificar, devolvemos un error
+        if (webpageId != id){
+            handleHttpError(res, 'No tiene permisos para modificar esta página', 403)
+            return
+        }
         
         // Obtenemos los datos de la web a modificar
         const webpageData = req.body 
