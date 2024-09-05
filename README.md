@@ -6,3 +6,5 @@ Implementación de una API en express usando el modelo vista-controloador.
 
 - MySQL como base de datos
 - express como framework
+- swagger para documentación
+- jest para pruebas unitarias
